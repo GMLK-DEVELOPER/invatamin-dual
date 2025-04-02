@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}Двойное Образование в Молдове - Главная{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="glitch-text">Двойное Образование в Республике Молдова</h1>
+        <p class="subtitle">Инновационная система обучения для будущих профессионалов</p>
+        <div class="cta-buttons">
+            <a href="/programs" class="btn btn-primary">Программы обучения</a>
+            <a href="/contacts" class="btn btn-secondary">Связаться с нами</a>
+        </div>
+    </div>
+    <div class="hero-image">
+        <div class="floating-element" id="floating-cube"></div>
+    </div>
+</section>
+
+<section class="features">
+    <h2 class="section-title">Преимущества двойного образования</h2>
+    
+    <div class="feature-cards">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <h3>Практический опыт</h3>
+            <p>Получение реального опыта работы во время обучения</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>Академические знания</h3>
+            <p>Основательная теоретическая подготовка в учебном заведении</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Карьерный рост</h3>
+            <p>Высокие шансы трудоустройства после окончания обучения</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-handshake"></i>
+            </div>
+            <h3>Партнерство с компаниями</h3>
+            <p>Обучение в сотрудничестве с ведущими предприятиями Молдовы</p>
+        </div>
+    </div>
+</section>
+
+<section class="programs-preview">
+    <h2 class="section-title">Наши программы</h2>
+    
+    <div class="program-cards">
+        <div class="program-card">
+            <div class="program-image" style="background-image: url('/static/img/it.jpg');">
+                <div class="program-overlay"></div>
+            </div>
+            <div class="program-content">
+                <h3>Информационные технологии</h3>
+                <p>Программирование, веб-разработка, IT-инфраструктура</p>
+                <a href="/programs#it" class="btn btn-sm">Подробнее</a>
+            </div>
+        </div>
+        
+        <div class="program-card">
+            <div class="program-image" style="background-image: url('/static/img/engineering.jpg');">
+                <div class="program-overlay"></div>
+            </div>
+            <div class="program-content">
+                <h3>Инженерное дело</h3>
+                <p>Машиностроение, электротехника, автоматизация</p>
+                <a href="/programs#engineering" class="btn btn-sm">Подробнее</a>
+            </div>
+        </div>
+        
+        <div class="program-card">
+            <div class="program-image" style="background-image: url('/static/img/business.jpg');">
+                <div class="program-overlay"></div>
+            </div>
+            <div class="program-content">
+                <h3>Бизнес и управление</h3>
+                <p>Менеджмент, маркетинг, бухгалтерский учет</p>
+                <a href="/programs#business" class="btn btn-sm">Подробнее</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <h2 class="section-title">Отзывы студентов</h2>
+    
+    <div class="testimonial-slider" id="testimonial-slider">
+        <div class="testimonial-slide">
+            <div class="testimonial-content">
+                <div class="testimonial-text">
+                    <p>"Двойное образование дало мне возможность получить не только диплом, но и реальный опыт работы. Уже на третьем курсе я работал над настоящими проектами!"</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background-image: url('/static/img/student1.jpg');"></div>
+                    <div class="author-info">
+                        <h4>Александр М.</h4>
+                        <p>Выпускник 2022, Программист</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testimonial-slide">
+            <div class="testimonial-content">
+                <div class="testimonial-text">
+                    <p>"Благодаря программе двойного образования я смогла сразу после выпуска получить должность младшего инженера. Теория и практика вместе дают отличные результаты!"</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar" style="background-image: url('/static/img/student2.jpg');"></div>
+                    <div class="author-info">
+                        <h4>Марина Д.</h4>
+                        <p>Выпускница 2021, Инженер</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="testimonial-controls">
+        <button class="testimonial-button prev" id="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="testimonial-button next" id="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+</section>
+
+<section class="partners">
+    <h2 class="section-title">Наши партнеры</h2>
+    
+    <div class="partners-logo-container">
+        <div class="partner-logo">
+            <img src="/static/img/CEDA-693x284.png" alt="Партнер 1">
+        </div>
+        <div class="partner-logo">
+            <img src="/static/img/dki9d177se.png" alt="Партнер 2">
+        </div>
+        <div class="partner-logo">
+            <img src="/static/img/images (1).png" alt="Партнер 3">
+        </div>
+        <div class="partner-logo">
+            <img src="/static/img/images.jpg" alt="Партнер 4">
+        </div>
+        <div class="partner-logo">
+            <img src="/static/img/images.png" alt="Партнер 5">
+        </div>
+        <div class="partner-logo">
+            <img src="/static/img/Logo_Eastern_Europe_colour_web.png" alt="Партнер 5">
+        </div>
+        <div class="partner-logo">
+            <img src="/static/img/logo2.png" alt="Партнер 5">
+        </div>
+    </div>
+</section>
+{% endblock %} 

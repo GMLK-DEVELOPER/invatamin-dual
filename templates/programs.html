@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block title %}Программы обучения - Двойное Образование в Молдове{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1 class="glitch-text">Программы двойного образования</h1>
+    <p class="subtitle">Выберите направление для вашего профессионального роста</p>
+</section>
+
+<section class="programs" id="it">
+    <div class="program-header">
+        <div class="program-icon">
+            <i class="fas fa-laptop-code"></i>
+        </div>
+        <h2>Информационные технологии</h2>
+    </div>
+    
+    <div class="program-details">
+        <div class="program-image">
+            <img src="/static/img/it-program.jpg" alt="IT программа">
+            <div class="program-stats">
+                <div class="stat">
+                    <span class="stat-value">4</span>
+                    <span class="stat-label">года</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">70%</span>
+                    <span class="stat-label">практики</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">95%</span>
+                    <span class="stat-label">трудоустройство</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="program-info">
+            <h3>О программе</h3>
+            <p>Программа двойного образования в сфере IT готовит специалистов по современным информационным технологиям, сочетая академические знания с практическим опытом работы в ведущих IT-компаниях Молдовы.</p>
+            
+            <h3>Основные направления</h3>
+            <ul class="program-list">
+                <li><i class="fas fa-check-circle"></i> Разработка программного обеспечения</li>
+                <li><i class="fas fa-check-circle"></i> Веб-разработка</li>
+                <li><i class="fas fa-check-circle"></i> Мобильная разработка</li>
+                <li><i class="fas fa-check-circle"></i> Сетевые технологии</li>
+                <li><i class="fas fa-check-circle"></i> Кибербезопасность</li>
+            </ul>
+            
+            <h3>Партнеры-работодатели</h3>
+            <div class="partner-logos">
+                <div class="partner-logo small"><img src="/static/img/it-partner1.png" alt="IT партнер 1"></div>
+                <div class="partner-logo small"><img src="/static/img/it-partner2.png" alt="IT партнер 2"></div>
+                <div class="partner-logo small"><img src="/static/img/it-partner3.png" alt="IT партнер 3"></div>
+            </div>
+            
+            <a href="/apply?program=it" class="btn btn-primary">Подать заявку</a>
+        </div>
+    </div>
+</section>
+
+<section class="programs" id="engineering">
+    <div class="program-header">
+        <div class="program-icon">
+            <i class="fas fa-cogs"></i>
+        </div>
+        <h2>Инженерное дело</h2>
+    </div>
+    
+    <div class="program-details">
+        <div class="program-image">
+            <img src="/static/img/engineering-program.jpg" alt="Инженерное дело">
+            <div class="program-stats">
+                <div class="stat">
+                    <span class="stat-value">4.5</span>
+                    <span class="stat-label">года</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">65%</span>
+                    <span class="stat-label">практики</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">90%</span>
+                    <span class="stat-label">трудоустройство</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="program-info">
+            <h3>О программе</h3>
+            <p>Программа двойного образования по инженерному делу готовит профессиональных инженеров с глубокими теоретическими знаниями и практическими навыками, полученными на современных производствах Молдовы.</p>
+            
+            <h3>Основные направления</h3>
+            <ul class="program-list">
+                <li><i class="fas fa-check-circle"></i> Машиностроение</li>
+                <li><i class="fas fa-check-circle"></i> Электротехника</li>
+                <li><i class="fas fa-check-circle"></i> Автоматизация производства</li>
+                <li><i class="fas fa-check-circle"></i> Промышленная электроника</li>
+                <li><i class="fas fa-check-circle"></i> Энергетика</li>
+            </ul>
+            
+            <h3>Партнеры-работодатели</h3>
+            <div class="partner-logos">
+                <div class="partner-logo small"><img src="/static/img/eng-partner1.png" alt="Инженерный партнер 1"></div>
+                <div class="partner-logo small"><img src="/static/img/eng-partner2.png" alt="Инженерный партнер 2"></div>
+                <div class="partner-logo small"><img src="/static/img/eng-partner3.png" alt="Инженерный партнер 3"></div>
+            </div>
+            
+            <a href="/apply?program=engineering" class="btn btn-primary">Подать заявку</a>
+        </div>
+    </div>
+</section>
+
+<section class="programs" id="business">
+    <div class="program-header">
+        <div class="program-icon">
+            <i class="fas fa-chart-pie"></i>
+        </div>
+        <h2>Бизнес и управление</h2>
+    </div>
+    
+    <div class="program-details">
+        <div class="program-image">
+            <img src="/static/img/business-program.jpg" alt="Бизнес и управление">
+            <div class="program-stats">
+                <div class="stat">
+                    <span class="stat-value">4</span>
+                    <span class="stat-label">года</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">60%</span>
+                    <span class="stat-label">практики</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">85%</span>
+                    <span class="stat-label">трудоустройство</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="program-info">
+            <h3>О программе</h3>
+            <p>Программа двойного образования в сфере бизнеса и управления готовит специалистов, обладающих современными знаниями в области экономики, менеджмента и маркетинга с практическим опытом работы в ведущих компаниях Молдовы.</p>
+            
+            <h3>Основные направления</h3>
+            <ul class="program-list">
+                <li><i class="fas fa-check-circle"></i> Менеджмент</li>
+                <li><i class="fas fa-check-circle"></i> Маркетинг</li>
+                <li><i class="fas fa-check-circle"></i> Финансы</li>
+                <li><i class="fas fa-check-circle"></i> Бухгалтерский учет</li>
+                <li><i class="fas fa-check-circle"></i> Логистика</li>
+            </ul>
+            
+            <h3>Партнеры-работодатели</h3>
+            <div class="partner-logos">
+                <div class="partner-logo small"><img src="/static/img/bus-partner1.png" alt="Бизнес партнер 1"></div>
+                <div class="partner-logo small"><img src="/static/img/bus-partner2.png" alt="Бизнес партнер 2"></div>
+                <div class="partner-logo small"><img src="/static/img/bus-partner3.png" alt="Бизнес партнер 3"></div>
+            </div>
+            
+            <a href="/apply?program=business" class="btn btn-primary">Подать заявку</a>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <h2>Готовы начать свой профессиональный путь?</h2>
+    <p>Подайте заявку на участие в программе двойного образования прямо сейчас!</p>
+    <a href="/apply" class="btn btn-lg btn-primary animated-btn">Подать заявку</a>
+</section>
+{% endblock %} 

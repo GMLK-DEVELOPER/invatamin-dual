@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block title %}Контакты - Двойное Образование в Молдове{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1 class="glitch-text">Связаться с нами</h1>
+    <p class="subtitle">У вас есть вопросы? Мы готовы помочь!</p>
+</section>
+
+<section class="contact-container">
+    <div class="contact-info">
+        <div class="contact-card">
+            <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h3>Адрес</h3>
+            <p>ул. Штефан чел Маре, 168<br>Кишинев, Молдова, MD-2004</p>
+        </div>
+        
+        <div class="contact-card">
+            <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+            </div>
+            <h3>Телефон</h3>
+            <p>+373 22 123 456<br>+373 69 123 456</p>
+        </div>
+        
+        <div class="contact-card">
+            <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Email</h3>
+            <p>info@doubleedu.md<br>support@doubleedu.md</p>
+        </div>
+        
+        <div class="contact-card">
+            <div class="contact-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <h3>Часы работы</h3>
+            <p>Пн-Пт: 9:00 - 18:00<br>Сб-Вс: Закрыто</p>
+        </div>
+        
+        <div class="social-media-block">
+            <h3>Присоединяйтесь к нам</h3>
+            <div class="social-icons large">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="contact-form-container">
+        <h2>Отправьте нам сообщение</h2>
+        <form id="contact-form" class="contact-form">
+            <div class="form-group">
+                <label for="name">Ваше имя</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+                <div class="form-animation-bar"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+                <div class="form-animation-bar"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" class="form-control">
+                <div class="form-animation-bar"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Тема</label>
+                <select id="subject" name="subject" class="form-control" required>
+                    <option value="" disabled selected>Выберите тему</option>
+                    <option value="general">Общий вопрос</option>
+                    <option value="programs">Вопрос о программах</option>
+                    <option value="partnership">Партнерство</option>
+                    <option value="application">Поступление</option>
+                    <option value="other">Другое</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Сообщение</label>
+                <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                <div class="form-animation-bar"></div>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block animated-btn">Отправить</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section class="map-section">
+    <h2 class="section-title">Где нас найти</h2>
+    <div class="map-container" id="map">
+        <!-- Здесь будет карта Google Maps -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2720.227817317493!2d28.830469876561686!3d47.01446337109608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97c3afea29187%3A0xc7f6b1102882a4a5!2zU3RyYWRhIMiYdGVmYW4gY2VsIE1hcmUgxZ9pIFNmw6JudCAxNjgsIENoaciZaW7Eg3UsINCc0L7Qu9C00LDQstC40Y8!5e0!3m2!1sru!2s!4v1680372145244!5m2!1sru!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
+
+<section class="faq-section">
+    <h2 class="section-title">Часто задаваемые вопросы</h2>
+    
+    <div class="accordion" id="faq-accordion">
+        <div class="accordion-item">
+            <div class="accordion-header" id="faq-1">
+                <h3>Как подать заявку на участие в программе?</h3>
+                <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="accordion-content">
+                <p>Для подачи заявки необходимо заполнить форму на нашем сайте в разделе "Подать заявку", прикрепив необходимые документы. После рассмотрения заявки мы свяжемся с вами для проведения собеседования.</p>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <div class="accordion-header" id="faq-2">
+                <h3>Какие документы нужны для поступления?</h3>
+                <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="accordion-content">
+                <p>Для поступления необходимы: копия удостоверения личности, диплом о среднем образовании или его копия, медицинская справка и 4 фотографии 3x4 см. Дополнительные документы могут потребоваться в зависимости от выбранной программы.</p>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <div class="accordion-header" id="faq-3">
+                <h3>Можно ли совмещать учебу по программе двойного образования с другой работой?</h3>
+                <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="accordion-content">
+                <p>Программа двойного образования предполагает полную занятость как в учебном заведении, так и на предприятии, согласно установленному графику. Совмещение с другой работой может быть затруднительным из-за интенсивности обучения.</p>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <div class="accordion-header" id="faq-4">
+                <h3>Предоставляется ли общежитие иногородним студентам?</h3>
+                <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="accordion-content">
+                <p>Да, иногородним студентам предоставляется общежитие при наличии свободных мест. Заявку на общежитие следует подавать одновременно с документами для поступления.</p>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <div class="accordion-header" id="faq-5">
+                <h3>Выдается ли диплом государственного образца?</h3>
+                <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="accordion-content">
+                <p>Да, по окончании программы двойного образования выдается диплом государственного образца, а также сертификат о прохождении практического обучения от компании-партнера.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

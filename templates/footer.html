@@ -1,0 +1,190 @@
+<footer class="custom-footer">
+    <div class="footer-container">
+        <!-- Первая колонка с логотипом и соцсетями -->
+        <div class="footer-logo-column">
+            <div class="footer-logo">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип">
+                <div class="logo-text">
+                    <div class="logo-title">ORGANIZAȚIA</div>
+                    <div class="logo-subtitle">PENTRU DEZVOLTAREA</div>
+                    <div class="logo-subtitle">ANTREPRENORIATULUI</div>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="copyright">
+                <p>© ODA, 2025</p>
+                <p>Dezvoltat de <a href="https://www.meta-sistem.md">www.meta-sistem.md</a></p>
+            </div>
+        </div>
+        
+        <!-- Средняя колонка с контактами -->
+        <div class="footer-contacts-column">
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Albișoara 38, et. 7, Chișinău, MD-2005</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <div class="contact-text">
+                    <p>Anticamera: +373 (22) 29 57 41</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <div class="contact-text">
+                    <p>Servicii de consultare: +373 (22) 22 57 99</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>office@oda.md</span>
+            </div>
+        </div>
+        
+        <!-- Правая колонка с логотипами и информацией -->
+        <div class="footer-partners-column">
+            <div class="partners-logos">
+                <img src="{{ url_for('static', filename='img/CEDA-693x284.png') }}" alt="World Bank" class="partner-logo">
+                <img src="{{ url_for('static', filename='img/Logo_Eastern_Europe_colour_web.png') }}" alt="European Union" class="partner-logo">
+            </div>
+            <div class="partners-info">
+                <p>Этот сайт был создан при поддержке Всемирного банка. Обновление дизайна было выполнено при поддержке Европейского Союза в рамках проекта технической помощи "Поддержка малых и средних предприятий в сельской местности".</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+.custom-footer {
+    background-color: #0a111a;
+    color: #fff;
+    padding: 50px 0;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-logo-column, .footer-contacts-column, .footer-partners-column {
+    width: 30%;
+}
+
+/* Логотип и соцсети */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.footer-logo img {
+    width: 70px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.logo-subtitle {
+    font-size: 14px;
+}
+
+.social-icons {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #0e1c2c;
+    color: white;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.social-icon:hover {
+    background-color: #1e3a5c;
+}
+
+.copyright {
+    font-size: 12px;
+    color: #888;
+}
+
+.copyright a {
+    color: #888;
+    text-decoration: none;
+}
+
+.copyright a:hover {
+    text-decoration: underline;
+}
+
+/* Контакты */
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.contact-item i {
+    margin-right: 15px;
+    margin-top: 3px;
+    color: #acacac;
+}
+
+.contact-text p {
+    margin: 0;
+}
+
+/* Партнеры */
+.partners-logos {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.partner-logo {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.partners-info {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #acacac;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .footer-container {
+        flex-direction: column;
+    }
+    
+    .footer-logo-column, .footer-contacts-column, .footer-partners-column {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}
+</style> 
