@@ -1,0 +1,1124 @@
+<!-- Navbar & Hero Start -->
+<div class="container-xxl position-relative p-0">
+    <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+        <a href="{{ url_for('index') }}" class="navbar-brand p-0">
+            <img src="{{ url_for('static', filename='company/logo-white.png') }}" alt="Logo" style="height: 100px; width: auto; transition: transform 0.3s;">
+                <!-- <img src="{{ url_for('static', filename='img/logo1.png') }}" alt="Logo" style="height: 250px; width: auto; object-fit: contain; margin-top: -50px; margin-bottom: -50px;"> -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav mx-auto py-0">
+                <a href="{{ url_for('index') }}" class="nav-item nav-link {% if active_page == 'home' %}active{% endif %}">Principala</a>
+                <a href="{{ url_for('about') }}" class="nav-item nav-link {% if active_page == 'about' %}active{% endif %}">Despre noi</a>
+                <a href="{{ url_for('service') }}" class="nav-item nav-link {% if active_page == 'service' %}active{% endif %}">Specialități</a>
+                <a href="{{ url_for('project') }}" class="nav-item nav-link {% if active_page == 'project' %}active{% endif %}">Joburi & Stagii</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle {% if active_page in ['team', 'testimonial', '404'] %}active{% endif %}" data-bs-toggle="dropdown">Despre noi
+                    </a>
+                    <div class="dropdown-menu m-0">
+                        <a href="{{ url_for('team') }}" class="dropdown-item {% if active_page == 'team' %}active{% endif %}">Cine suntem?
+
+                        </a>
+                        <a href="{{ url_for('testimonial') }}" class="dropdown-item {% if active_page == 'testimonial' %}active{% endif %}">Prețuri</a>
+                        <a href="{{ url_for('error_404') }}" class="dropdown-item {% if active_page == '404' %}active{% endif %}">Blog</a>
+                        <!-- <a href="{{ url_for('error_404') }}" class="dropdown-item {% if active_page == '404' %}active{% endif %}">Blog</a> -->
+
+                    </div>
+                </div>
+                <a href="{{ url_for('contact') }}" class="nav-item nav-link {% if active_page == 'contact' %}active{% endif %}">Suport 24/7
+                </a>
+            </div>
+            <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block ps3-btn">Get Started</a>
+        </div>
+    </nav>
+
+    {% block hero %}
+    <div class="container-xxl py-5 ps3-bg hero-header">
+        <!-- Стили PS3 -->
+        <style>
+            /* PS3 стиль фона */
+            .ps3-bg {
+                background-color: #000e1e;  /* Темно-синий фон PS3 */
+                position: relative;
+                overflow: hidden;
+            }
+            
+            /* Основной контейнер для волн PS3 */
+            #ps3-waves-container {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+                overflow: hidden;
+            }
+            
+            /* Анимированные кнопки в стиле PS3 */
+            .ps3-btn {
+                font-size: 1.8rem !important;
+                padding: 1.2rem 3.5rem !important;
+                margin-top: 2rem !important; /* Увеличиваем отступ сверху */
+                margin-bottom: 1rem !important;
+                font-weight: 600;
+                display: inline-block !important; /* Гарантируем правильное отображение */
+                background: linear-gradient(to bottom, #3598db, #2a80b9) !important;
+                box-shadow: 0 0 25px rgba(53, 152, 219, 0.8) !important;
+                border: none !important;
+                border-radius: 50px !important;
+                color: #fff !important;
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
+                position: relative !important;
+                z-index: 10 !important; /* Высокий z-index для гарантии видимости */
+                transition: all 0.3s !important;
+                text-decoration: none !important;
+                cursor: pointer !important;
+                opacity: 1 !important; /* Гарантируем видимость */
+                visibility: visible !important; /* Гарантируем видимость */
+            }
+            
+            /* Эффект наведения */
+            .ps3-btn:hover {
+                background: linear-gradient(to bottom, #49a3df, #2e8ece) !important;
+                box-shadow: 0 0 30px rgba(53, 152, 219, 1) !important;
+                transform: scale(1.05) !important;
+            }
+            
+            /* PS3 стиль текста */
+            .ps3-text {
+                color: #fff;
+                text-shadow: 0 0 10px rgba(69, 195, 237, 0.7);
+                font-family: 'Jost', sans-serif;
+                letter-spacing: 1px;
+                position: relative;
+                z-index: 2;
+            }
+            
+            /* PS3 волновой эффект - главный градиент */
+            .ps3-gradient {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(ellipse at center, rgba(0, 14, 30, 0.1) 0%, rgba(0, 14, 30, 0.8) 80%);
+                z-index: 1;
+            }
+            
+            /* Анимация пульсации PS3 */
+            @keyframes ps3Pulse {
+                0% { opacity: 0.7; transform: scale(1); }
+                50% { opacity: 1; transform: scale(1.02); }
+                100% { opacity: 0.7; transform: scale(1); }
+            }
+            
+            /* PS3 плавающие частицы */
+            .ps3-particle {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(69, 195, 237, 0.2);
+                box-shadow: 0 0 15px 5px rgba(69, 195, 237, 0.1);
+                z-index: 1;
+                animation: ps3Float 15s infinite ease-in-out;
+            }
+            
+            @keyframes ps3Float {
+                0% { transform: translate(0, 0) scale(1); opacity: 0; }
+                10% { opacity: 0.7; }
+                90% { opacity: 0.7; }
+                100% { transform: translate(var(--tx), var(--ty)) scale(0.8); opacity: 0; }
+            }
+            
+            /* PS3 свечение текста */
+            .ps3-glow {
+                text-shadow: 0 0 15px rgba(69, 195, 237, 0.8), 0 0 30px rgba(69, 195, 237, 0.5);
+                animation: ps3TextGlow 3s infinite alternate;
+            }
+            
+            @keyframes ps3TextGlow {
+                0% { text-shadow: 0 0 10px rgba(69, 195, 237, 0.6), 0 0 20px rgba(69, 195, 237, 0.3); }
+                100% { text-shadow: 0 0 20px rgba(69, 195, 237, 0.9), 0 0 30px rgba(69, 195, 237, 0.7), 0 0 40px rgba(69, 195, 237, 0.5); }
+            }
+            
+            /* Содержимое на первом плане */
+            .content-foreground {
+                position: relative;
+                z-index: 2;
+            }
+            
+            /* Закругленный переход снизу */
+            .ps3-curve {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 10%;
+                background: #fff;
+                clip-path: ellipse(50% 100% at 50% 100%);
+                z-index: 2;
+            }
+            
+            /* PS3 анимация появления текста */
+            .ps3-text-reveal {
+                position: relative;
+                display: inline-block;
+                opacity: 0;
+                transform: translateY(10px);
+                filter: blur(5px);
+            }
+            
+            .ps3-title-container {
+                overflow: hidden;
+                position: relative;
+            }
+            
+            .ps3-title-container::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 200%;
+                height: 100%;
+                background: linear-gradient(90deg, 
+                    transparent 0%, 
+                    rgba(69, 195, 237, 0.2) 40%, 
+                    rgba(69, 195, 237, 0.4) 50%, 
+                    rgba(69, 195, 237, 0.2) 60%, 
+                    transparent 100%);
+                animation: ps3-scan 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+                animation-delay: 0.8s;
+                z-index: 3;
+            }
+            
+            @keyframes ps3-text-reveal {
+                0% {
+                    opacity: 0;
+                    transform: translateY(10px);
+                    filter: blur(5px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    filter: blur(0);
+                }
+            }
+            
+            @keyframes ps3-scan {
+                0% {
+                    left: -100%;
+                }
+                100% {
+                    left: 100%;
+                }
+            }
+            
+            /* Эффект печатающегося текста */
+            .ps3-typing {
+                position: relative;
+                display: inline-block;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 0;
+                border-right: 2px solid rgba(69, 195, 237, 0.7);
+                animation: 
+                    ps3-typing 1.5s steps(30, end) forwards,
+                    ps3-blink-caret 0.75s step-end infinite;
+                animation-delay: 0.4s;
+            }
+            
+            @keyframes ps3-typing {
+                from { width: 0 }
+                to { width: 100% }
+            }
+            
+            @keyframes ps3-blink-caret {
+                from, to { border-color: transparent }
+                50% { border-color: rgba(69, 195, 237, 0.7) }
+            }
+            
+            /* Мерцающий эффект загрузки PS3 */
+            .ps3-loading-dots span {
+                display: inline-block;
+                opacity: 0;
+                animation: ps3-loading-dots 1.4s linear infinite;
+            }
+            .ps3-loading-dots span:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            .ps3-loading-dots span:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+            
+            @keyframes ps3-loading-dots {
+                0% { opacity: 0; }
+                50% { opacity: 1; }
+                100% { opacity: 0; }
+            }
+            
+            /* Анимация плавания для изображения */
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+                100% { transform: translateY(0px); }
+            }
+            
+            /* Растягиваем контейнер на всю ширину */
+            .container-xxl.py-5 {
+                max-width: 100% !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            
+            .container.my-5.py-5.px-lg-5.content-foreground {
+                max-width: 100% !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            
+            /* Растягиваем контент от края до края */
+            .hero-content-wrapper {
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+                width: 100%;
+                padding: 0 5% !important;
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+            
+            .hero-text {
+                flex: 0 0 45%;
+                padding-left: 5%;
+                max-width: 45%;
+            }
+            
+            .hero-image {
+                position: relative;
+                right: -8%;
+                transform-origin: right center;
+                flex: 0 0 55%;
+                text-align: right;
+                max-width: 55%;
+                overflow: visible;
+            }
+            
+            /* Увеличиваем размер заголовка */
+            #ps3-main-title {
+                font-size: 4.5rem !important;
+                font-weight: 800;
+                margin-bottom: 2rem !important;
+                letter-spacing: 1.5px;
+                line-height: 1.1;
+                white-space: normal !important;
+                width: auto !important;
+                display: block !important;
+                overflow: visible !important;
+            }
+            
+            /* Увеличиваем размер описания */
+            .hero-text p {
+                font-size: 2.2rem !important;
+                line-height: 1.4;
+                margin-bottom: 3rem !important;
+                max-width: 100%;
+                font-weight: 500;
+                white-space: normal;
+            }
+            
+            /* Увеличиваем изображение */
+            .hero-image img {
+                max-width: 115% !important;
+                transform: scale(1.15);
+                transform-origin: right center;
+            }
+            
+            /* Добавляем стиль для текстового блока, чтобы текст не выходил за пределы */
+            .hero-text {
+                overflow: visible;
+                margin-left: -3%;
+                transform-origin: left center;
+            }
+            
+            /* Корректируем контейнер изображения */
+            .hero-image {
+                margin-right: -5%;
+            }
+            
+            /* Медиа-запрос для адаптации на мобильных устройствах */
+            @media (max-width: 992px) {
+                #ps3-main-title {
+                    font-size: 3.5rem !important;
+                    letter-spacing: 1px;
+                }
+                
+                .hero-text p {
+                    font-size: 1.8rem !important;
+                }
+                
+                .ps3-btn {
+                    font-size: 1.5rem !important;
+                    padding: 1rem 3rem !important;
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .hero-content-wrapper {
+                    flex-direction: column;
+                }
+                
+                .hero-text, .hero-image {
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                    right: 0;
+                    padding: 0 5%;
+                }
+                
+                .hero-image img {
+                    max-width: 100% !important;
+                    transform: scale(1.05);
+                    transform-origin: center center;
+                }
+                
+                #ps3-main-title {
+                    font-size: 3rem !important;
+                    text-align: center;
+                }
+            }
+            
+            /* Базовые стили для появления элементов */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes fadeInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(80px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes scaleIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.8);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+            
+            @keyframes glowPulse {
+                0% {
+                    text-shadow: 0 0 10px rgba(69, 195, 237, 0.6), 0 0 20px rgba(69, 195, 237, 0.4);
+                }
+                50% {
+                    text-shadow: 0 0 20px rgba(69, 195, 237, 0.9), 0 0 30px rgba(69, 195, 237, 0.7), 0 0 40px rgba(69, 195, 237, 0.5);
+                }
+                100% {
+                    text-shadow: 0 0 10px rgba(69, 195, 237, 0.6), 0 0 20px rgba(69, 195, 237, 0.4);
+                }
+            }
+            
+            /* Применяем анимацию к заголовку */
+            .title-animate {
+                opacity: 0;
+                animation: fadeInUp 1.2s ease forwards, glowPulse 3s infinite 1.2s;
+            }
+            
+            /* Анимация для текста */
+            .text-animate {
+                opacity: 0;
+                animation: fadeInUp 1.2s ease 0.4s forwards;
+            }
+            
+            /* Анимация для кнопки */
+            .button-animate {
+                animation: buttonAppear 0.8s forwards !important;
+            }
+            
+            /* Анимация для изображения */
+            .image-animate {
+                opacity: 0;
+                animation: fadeInRight 1.5s ease 0.2s forwards;
+            }
+            
+            /* Пульсирующая анимация для кнопки */
+            @keyframes buttonPulse {
+                0% {
+                    box-shadow: 0 0 15px rgba(53, 152, 219, 0.7);
+                    transform: scale(1);
+                }
+                50% {
+                    box-shadow: 0 0 25px rgba(53, 152, 219, 1);
+                    transform: scale(1.05);
+                }
+                100% {
+                    box-shadow: 0 0 15px rgba(53, 152, 219, 0.7);
+                    transform: scale(1);
+                }
+            }
+            
+            /* Добавляем анимацию появления */
+            @keyframes buttonAppear {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px) scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+            
+            /* Анимация для частиц */
+            @keyframes particleGlow {
+                0% {
+                    opacity: 0.2;
+                    box-shadow: 0 0 5px rgba(69, 195, 237, 0.2);
+                }
+                50% {
+                    opacity: 0.8;
+                    box-shadow: 0 0 15px rgba(69, 195, 237, 0.5);
+                }
+                100% {
+                    opacity: 0.2;
+                    box-shadow: 0 0 5px rgba(69, 195, 237, 0.2);
+                }
+            }
+            
+            .ps3-particle {
+                animation: particleGlow 4s infinite alternate;
+                animation-delay: calc(var(--particle-delay, 0) * 1s);
+            }
+            
+            /* Улучшенный header */
+            .navbar {
+                background-color: rgba(15, 10, 41, 0.9) !important; /* Полупрозрачный фон */
+                backdrop-filter: blur(10px) !important; /* Эффект размытия фона */
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+                padding: 20px 0 !important;
+                transition: all 0.4s ease !important;
+                position: fixed !important;
+                top: 0 !important;
+                width: 100% !important;
+                z-index: 1000 !important;
+            }
+            
+            /* Перемещаем логотип вправо */
+            .navbar-brand {
+                margin-left: 20px !important;
+                padding-left: 15px !important;
+                position: relative !important;
+                transform: translateX(15px) !important;
+            }
+            
+            /* Для средних и больших экранов */
+            @media (min-width: 992px) {
+                .navbar-brand {
+                    margin-left: 30px !important;
+                    transform: translateX(25px) !important;
+                }
+            }
+            
+            /* Для больших экранов */
+            @media (min-width: 1200px) {
+                .navbar-brand {
+                    margin-left: 40px !important;
+                    transform: translateX(35px) !important;
+                }
+            }
+            
+            /* Убираем мерцание логотипа при скролле */
+            .navbar-brand img {
+                height: 55px !important;
+                width: auto !important;
+                transition: none !important; /* Убираем transition для логотипа */
+                filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)) !important;
+                opacity: 1 !important; /* Всегда полная непрозрачность */
+            }
+            
+            /* Улучшенные пункты меню */
+            .navbar-nav .nav-item {
+                margin: 0 10px !important;
+                position: relative !important;
+            }
+            
+            .navbar-nav .nav-link {
+                font-size: 1.1rem !important;
+                font-weight: 500 !important;
+                color: #ffffff !important;
+                padding: 8px 15px !important;
+                border-radius: 5px !important;
+                transition: all 0.3s ease !important;
+                position: relative !important;
+                letter-spacing: 0.5px !important;
+            }
+            
+            /* Эффект подчеркивания при наведении */
+            .navbar-nav .nav-link::after {
+                content: '' !important;
+                position: absolute !important;
+                width: 0 !important;
+                height: 2px !important;
+                bottom: 0 !important;
+                left: 50% !important;
+                background-color: var(--primary-color) !important;
+                transition: all 0.3s ease !important;
+                transform: translateX(-50%) !important;
+            }
+            
+            .navbar-nav .nav-link:hover::after,
+            .navbar-nav .nav-link.active::after {
+                width: 80% !important;
+            }
+            
+            /* Активный пункт меню и эффект наведения */
+            .navbar-nav .nav-link:hover,
+            .navbar-nav .nav-link.active {
+                color: var(--primary-color) !important;
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                transform: translateY(-2px) !important;
+            }
+            
+            /* Улучшенная кнопка */
+            .navbar .ps3-btn {
+                padding: 10px 25px !important;
+                border-radius: 30px !important;
+                font-weight: 600 !important;
+                letter-spacing: 0.7px !important;
+                text-transform: uppercase !important;
+                font-size: 0.95rem !important;
+                box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4) !important;
+                transition: all 0.3s ease !important;
+            }
+            
+            .navbar .ps3-btn:hover {
+                transform: translateY(-3px) !important;
+                box-shadow: 0 8px 20px rgba(255, 107, 53, 0.6) !important;
+            }
+            
+            /* Стили для белого header при скролле */
+            .navbar.scrolled {
+                background-color: #ffffff !important;
+                padding: 15px 0 !important;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+            }
+            
+            .navbar.scrolled .nav-link {
+                color: #333333 !important;
+            }
+            
+            .navbar.scrolled .nav-link:hover,
+            .navbar.scrolled .nav-link.active {
+                color: var(--primary-color) !important;
+                background-color: rgba(255, 107, 53, 0.1) !important;
+            }
+            
+            /* Выпадающее меню */
+            .dropdown-menu {
+                background-color: rgba(25, 20, 51, 0.95) !important;
+                border: none !important;
+                border-radius: 10px !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+                backdrop-filter: blur(10px) !important;
+                padding: 15px !important;
+                margin-top: 15px !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+            
+            .navbar.scrolled .dropdown-menu {
+                background-color: #ffffff !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+            }
+            
+            .dropdown-item {
+                color: #ffffff !important;
+                padding: 10px 20px !important;
+                border-radius: 5px !important;
+                transition: all 0.3s ease !important;
+                font-weight: 500 !important;
+                position: relative !important;
+            }
+            
+            .navbar.scrolled .dropdown-item {
+                color: #333333 !important;
+            }
+            
+            .dropdown-item:hover,
+            .dropdown-item.active {
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                color: var(--primary-color) !important;
+                transform: translateX(5px) !important;
+            }
+            
+            .navbar.scrolled .dropdown-item:hover,
+            .navbar.scrolled .dropdown-item.active {
+                background-color: rgba(255, 107, 53, 0.1) !important;
+            }
+            
+            /* Эффект появления выпадающего меню */
+            .dropdown-menu.show {
+                animation: fadeInUp 0.4s ease forwards;
+            }
+            
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            /* Улучшенный мобильный вид */
+            @media (max-width: 992px) {
+                .navbar-collapse {
+                    background-color: rgba(15, 10, 41, 0.95) !important;
+                    border-radius: 15px !important;
+                    padding: 20px !important;
+                    margin-top: 15px !important;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+                    backdrop-filter: blur(10px) !important;
+                }
+                
+                .navbar.scrolled .navbar-collapse {
+                    background-color: #ffffff !important;
+                }
+                
+                .navbar-toggler {
+                    border: none !important;
+                    padding: 10px !important;
+                    outline: none !important;
+                    box-shadow: none !important;
+                }
+                
+                .navbar-toggler:focus {
+                    box-shadow: none !important;
+                }
+                
+                .navbar-toggler .fa-bars {
+                    color: #ffffff !important;
+                    font-size: 1.5rem !important;
+                    transition: all 0.3s ease !important;
+                }
+                
+                .navbar.scrolled .navbar-toggler .fa-bars {
+                    color: #333333 !important;
+                }
+                
+                .navbar-nav .nav-link {
+                    padding: 12px 20px !important;
+                    margin: 5px 0 !important;
+                }
+            }
+            
+            /* Отступ для контента под fixed navbar */
+            .hero-header {
+                padding-top: 100px !important;
+            }
+        </style>
+        
+        <!-- PS3 градиент оверлей -->
+        <div class="ps3-gradient"></div>
+        
+        <!-- Контейнер для волн PS3 -->
+        <div id="ps3-waves-container"></div>
+        
+        <!-- PS3 плавающие частицы -->
+        {% for i in range(20) %}
+        <div class="ps3-particle" style="top: {{ range(20, 80) | random }}%; left: {{ range(10, 90) | random }}%; width: {{ range(3, 12) | random }}px; height: {{ range(3, 12) | random }}px; --tx: {{ range(-200, 200) | random }}px; --ty: {{ range(-150, 150) | random }}px;"></div>
+        {% endfor %}
+        
+        <div class="container my-5 py-5 px-lg-5 content-foreground">
+            <!-- Новый блок с двумя колонками -->
+            <div class="hero-content-wrapper">
+                <!-- Левая колонка с текстом -->
+                <div class="hero-text">
+                    <!-- Эффект загрузки PS3 -->
+                    <div id="ps3-loading" class="mb-4 ps3-text" style="font-size: 18px;">
+                        Loading System<span class="ps3-loading-dots"><span>.</span><span>.</span><span>.</span></span>
+                    </div>
+                
+                    <!-- Заголовок с эффектом печатающегося текста -->
+                    <div class="ps3-title-container mb-4">
+                        <h1 id="ps3-main-title" class="text-white ps3-text ps3-glow ps3-typing" style="display: inline-block; white-space: nowrap; overflow: hidden; width: 0;">
+                            {% block page_title %}EduWorks.md - Viitorul începe aici!{% endblock %}
+                        </h1>
+                    </div>
+                    
+                    <p class="ps3-text mb-4 ps3-text-reveal" style="animation-delay: 2s; max-width: 600px; font-size: 1.4rem; line-height: 1.6;">
+                        Conectam elevii, instituțiile de învățământ și companiile pentru o carieră de succes.
+                    </p>
+                    
+                    <div class="ps3-text-reveal" style="animation-delay: 2.5s;">
+                        <a href="#" class="btn rounded-pill py-3 px-5 ps3-btn">Înscrie-te acum</a>
+                    </div>
+                </div>
+                
+                <!-- Правая колонка с изображением -->
+                <div class="hero-image ps3-text-reveal" style="animation-delay: 1.8s;">
+                    <img src="{{ url_for('static', filename='img/tIvZxKUi6G4AAAAASUVORK5CYII.png') }}" alt="Учитель с учениками" class="img-fluid">
+                </div>
+            </div>
+            
+            <!-- Breadcrumbs с появлением по одному -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <hr id="ps3-divider" class="bg-white mx-auto mt-0" style="width: 90px; box-shadow: 0 0 10px rgba(69, 195, 237, 0.7); opacity: 0;">
+                    
+                    <nav id="ps3-nav" aria-label="breadcrumb" style="opacity: 0;">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item ps3-text-reveal"><a class="text-white" href="{{ url_for('index') }}" style="text-shadow: 0 0 5px rgba(69, 195, 237, 0.5);">Home</a></li>
+                            {% block breadcrumb %}
+                            <li class="breadcrumb-item ps3-text-reveal"><a class="text-white" href="#" style="text-shadow: 0 0 5px rgba(69, 195, 237, 0.5);">Pages</a></li>
+                            <li class="breadcrumb-item text-white active ps3-text-reveal" aria-current="page" style="text-shadow: 0 0 5px rgba(69, 195, 237, 0.5);">Page</li>
+                            {% endblock %}
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Закругленный переход снизу -->
+        <div class="ps3-curve"></div>
+    </div>
+    {% endblock %}
+</div>
+
+<!-- JavaScript для PS3 волн и анимации текста -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Создаем канвас для PS3 волн
+    const wavesContainer = document.getElementById('ps3-waves-container');
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    wavesContainer.appendChild(canvas);
+    
+    // Настраиваем размер канваса
+    function resizeCanvas() {
+        canvas.width = wavesContainer.offsetWidth;
+        canvas.height = wavesContainer.offsetHeight;
+    }
+    
+    // Инициализация при загрузке и изменении размера окна
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    // Конфигурация волн в стиле PS3
+    const ps3Waves = {
+        waveCount: 3,
+        waveColors: [
+            'rgba(28, 56, 121, 0.4)',
+            'rgba(45, 90, 170, 0.3)',
+            'rgba(69, 195, 237, 0.2)'
+        ],
+        phase: 0,
+        speed: 0.025,
+        frequency: 0.6,
+        amplitude: canvas.height / 6
+    };
+    
+    // Функция анимации волн PS3
+    function animatePS3Waves() {
+        // Очистка канваса
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Инкремент фазы для движения
+        ps3Waves.phase += ps3Waves.speed;
+        
+        // Отрисовка каждой волны
+        for (let i = 0; i < ps3Waves.waveCount; i++) {  
+            const waveHeight = ps3Waves.amplitude * (i + 1) * 0.4;
+            const waveFrequency = ps3Waves.frequency - i * 0.05;
+            const waveOffset = canvas.height * 0.5 + i * (canvas.height * 0.1);
+            
+            // Начало отрисовки пути
+            ctx.beginPath();
+            ctx.moveTo(0, waveOffset);
+            
+            // Отрисовка волнистой линии
+            for (let x = 0; x < canvas.width; x += 10) {
+                const y = waveOffset + Math.sin((x * waveFrequency / canvas.width) + ps3Waves.phase + i) * waveHeight;
+                ctx.lineTo(x, y);
+            }
+            
+            // Завершение пути, замыкание снизу
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.closePath();
+            
+            // Заливка
+            ctx.fillStyle = ps3Waves.waveColors[i];
+            ctx.fill();
+            
+            // Размытие для эффекта свечения
+            ctx.shadowColor = 'rgba(69, 195, 237, 0.3)';
+            ctx.shadowBlur = 15;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            
+            // Линия верха волны
+            ctx.beginPath();
+            ctx.moveTo(0, waveOffset);
+            
+            for (let x = 0; x < canvas.width; x += 10) {
+                const y = waveOffset + Math.sin((x * waveFrequency / canvas.width) + ps3Waves.phase + i) * waveHeight;
+                ctx.lineTo(x, y);
+            }
+            
+            ctx.strokeStyle = 'rgba(69, 195, 237, 0.2)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+        
+        // Продолжение анимации
+        requestAnimationFrame(animatePS3Waves);
+    }
+    
+    // Запуск анимации
+    animatePS3Waves();
+    
+    // Добавляем интерактивность при движении мышью
+    document.addEventListener('mousemove', function(e) {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        // Меняем параметры волн в зависимости от положения мыши
+        ps3Waves.amplitude = canvas.height / 6 + (mouseY * canvas.height / 12);
+        ps3Waves.frequency = 0.6 + mouseX * 0.5;
+    });
+    
+    // Ускоряем анимацию текста в стиле загрузки PS3
+    setTimeout(function() {
+        // Скрываем загрузку
+        const loadingElement = document.getElementById('ps3-loading');
+        if (loadingElement) {
+            loadingElement.style.animation = 'ps3-text-reveal 0.3s forwards reverse';
+            
+            // После исчезновения загрузки, показываем заголовок
+            setTimeout(function() {
+                loadingElement.style.display = 'none';
+                
+                // Показываем текстовые элементы с меньшими задержками
+                const textElements = document.querySelectorAll('.ps3-text-reveal');
+                textElements.forEach((item) => {
+                    if (item.style.animationDelay) {
+                        // Уменьшаем задержку в два раза
+                        const currentDelay = parseFloat(item.style.animationDelay);
+                        const newDelay = currentDelay / 2;
+                        
+                        setTimeout(function() {
+                            item.style.animation = 'ps3-text-reveal 0.5s forwards';
+                        }, newDelay * 1000);
+                    }
+                });
+                
+                // Показываем разделитель после анимации печати
+                setTimeout(function() {
+                    const divider = document.getElementById('ps3-divider');
+                    if (divider) {
+                        divider.style.animation = 'ps3-text-reveal 0.3s forwards';
+                        divider.style.opacity = '1';
+                    }
+                    
+                    // Показываем навигацию
+                    setTimeout(function() {
+                        const nav = document.getElementById('ps3-nav');
+                        if (nav) {
+                            nav.style.animation = 'ps3-text-reveal 0.3s forwards';
+                            nav.style.opacity = '1';
+                            
+                            // Анимируем каждый элемент breadcrumb быстрее
+                            const items = document.querySelectorAll('#ps3-nav .ps3-text-reveal');
+                            items.forEach((item, index) => {
+                                setTimeout(function() {
+                                    item.style.animation = 'ps3-text-reveal 0.3s forwards';
+                                }, index * 150);
+                            });
+                        }
+                    }, 800);
+                }, 1200);
+            }, 300);
+        }
+    }, 1000);
+    
+    // Добавляем исправление для печатающегося текста
+    setTimeout(function() {
+        // После завершения анимации печати, исправляем стили
+        const mainTitle = document.getElementById('ps3-main-title');
+        if (mainTitle) {
+            setTimeout(function() {
+                mainTitle.style.width = 'auto';
+                mainTitle.style.whiteSpace = 'normal';
+                mainTitle.style.overflow = 'visible';
+            }, 3000); // Даем время на завершение анимации печати
+        }
+    }, 2000);
+    
+    // Добавляем классы для анимации
+    const mainTitle = document.getElementById('ps3-main-title');
+    if (mainTitle) {
+        mainTitle.classList.add('title-animate');
+    }
+    
+    // Добавляем класс для текста
+    const textElements = document.querySelectorAll('.hero-text p');
+    textElements.forEach(el => {
+        el.classList.add('text-animate');
+    });
+    
+    // Добавляем класс для кнопки
+    const buttons = document.querySelectorAll('.ps3-btn');
+    buttons.forEach(btn => {
+        btn.classList.add('button-animate');
+    });
+    
+    // Добавляем класс для изображения
+    const images = document.querySelectorAll('.hero-image');
+    images.forEach(img => {
+        img.classList.add('image-animate');
+    });
+    
+    // Добавляем переменные задержки для частиц
+    const particles = document.querySelectorAll('.ps3-particle');
+    particles.forEach((particle, index) => {
+        const delay = (index % 10) / 2; // Разные задержки для создания эффекта
+        particle.style.setProperty('--particle-delay', delay);
+    });
+    
+    // Анимация для волн
+    setTimeout(function() {
+        // Плавно увеличиваем амплитуду волн
+        const waveCanvas = document.querySelector('#ps3-waves-container canvas');
+        if (waveCanvas) {
+            const ctx = waveCanvas.getContext('2d');
+            let amplitude = 0;
+            const targetAmplitude = waveCanvas.height / 4;
+            
+            function increaseAmplitude() {
+                amplitude += targetAmplitude / 30;
+                if (amplitude >= targetAmplitude) {
+                    amplitude = targetAmplitude;
+                } else {
+                    requestAnimationFrame(increaseAmplitude);
+                }
+                
+                // Обновляем амплитуду в ps3Waves (если это глобальная переменная)
+                if (window.ps3Waves) {
+                    window.ps3Waves.amplitude = amplitude;
+                }
+            }
+            
+            increaseAmplitude();
+        }
+    }, 500);
+    
+    // Проверяем, есть ли уже кнопка
+    const heroText = document.querySelector('.hero-text');
+    if (heroText && !heroText.querySelector('.ps3-btn')) {
+        // Создаем кнопку, если её нет
+        const button = document.createElement('a');
+        button.href = '#';
+        button.className = 'ps3-btn button-animate';
+        button.textContent = 'Înscrie-te acum';
+        button.style.display = 'inline-block';
+        button.style.marginTop = '2rem';
+        
+        // Вставляем кнопку после текста
+        const textParagraph = heroText.querySelector('p');
+        if (textParagraph) {
+            textParagraph.after(button);
+        } else {
+            // Если нет параграфа, просто добавляем в конец
+            heroText.appendChild(button);
+        }
+    }
+    
+    // Также проверяем видимость всех существующих кнопок
+    const allButtons = document.querySelectorAll('.ps3-btn');
+    allButtons.forEach(btn => {
+        btn.style.opacity = '1';
+        btn.style.visibility = 'visible';
+        btn.style.display = 'inline-block';
+        btn.classList.add('button-animate');
+    });
+});
+
+// Исправленный скрипт для предотвращения мерцания логотипа
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbar');
+    const logoImg = navbar.querySelector('.navbar-brand img');
+    
+    // Сохраняем оригинальные и альтернативные пути к логотипам
+    const originalLogoSrc = logoImg ? logoImg.src : "{{ url_for('static', filename='company/logo-white.png') }}";
+    const scrolledLogoSrc = "{{ url_for('static', filename='img/logo1.png') }}";
+    
+    // Предварительно загружаем оба изображения, чтобы избежать мерцания
+    if (logoImg) {
+        // Создаем скрытые изображения для предварительной загрузки
+        const preloadOriginal = new Image();
+        preloadOriginal.src = originalLogoSrc;
+        
+        const preloadScrolled = new Image();
+        preloadScrolled.src = scrolledLogoSrc;
+    }
+    
+    // Улучшенная функция для плавной смены состояния без мерцания
+    function handleScroll() {
+        if (window.scrollY > 50) {
+            // Добавляем класс scrolled без изменения прозрачности
+            if (!navbar.classList.contains('scrolled')) {
+                navbar.classList.add('scrolled');
+                
+                // Меняем логотип мгновенно без анимации
+                if (logoImg && logoImg.src !== scrolledLogoSrc) {
+                    logoImg.src = scrolledLogoSrc;
+                }
+            }
+        } else {
+            // Убираем класс scrolled без изменения прозрачности
+            if (navbar.classList.contains('scrolled')) {
+                navbar.classList.remove('scrolled');
+                
+                // Возвращаем оригинальный логотип мгновенно без анимации
+                if (logoImg && logoImg.src !== originalLogoSrc) {
+                    logoImg.src = originalLogoSrc;
+                }
+            }
+        }
+    }
+    
+    // Используем requestAnimationFrame для более плавной работы
+    let ticking = false;
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    // Вызываем функцию сразу для установки корректного состояния
+    handleScroll();
+});
+</script>
+<!-- Navbar & Hero End --> 

@@ -1,200 +1,146 @@
 {% extends 'base.html' %}
 
-{% block title %}О нас - Двойное Образование в Молдове{% endblock %}
+{% block title %}About - Digital Agency{% endblock %}
+
+{% block page_title %}About Us{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+<li class="breadcrumb-item text-white active" aria-current="page">About</li>
+{% endblock %}
 
 {% block content %}
-<section class="page-header">
-    <h1 class="glitch-text">О двойном образовании</h1>
-    <p class="subtitle">Инновационный подход к обучению и подготовке специалистов</p>
-</section>
-
-<section class="about-intro">
-    <div class="about-image">
-        <img src="/static/img/about-main.jpg" alt="Двойное образование в Молдове">
-    </div>
-    <div class="about-content">
-        <h2>Что такое двойное образование?</h2>
-        <p>Двойное образование - это инновационная модель профессионального обучения, которая объединяет теоретическую подготовку в учебном заведении с практическим обучением на предприятии.</p>
-        <p>Студенты проводят часть времени в колледже или университете, изучая теоретические основы профессии, а другую часть - непосредственно на рабочем месте, приобретая практические навыки и знакомясь с реальной производственной средой.</p>
-        <div class="stats-container">
-            <div class="stat-item">
-                <div class="stat-number" data-counter="2018">0</div>
-                <p class="stat-text">Год начала программы</p>
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <p class="section-title text-secondary">About Us<span></span></p>
+                <h1 class="mb-5">#1 Digital solution with 10 years of experience</h1>
+                <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna dolore erat amet</p>
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">Digital Marketing</p>
+                        <p class="mb-2">85%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">SEO & Backlinks</p>
+                        <p class="mb-2">90%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-secondary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">Design & Development</p>
+                        <p class="mb-2">95%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-dark" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <a href="" class="btn btn-primary py-sm-3 px-sm-5 rounded-pill mt-3">Read More</a>
             </div>
-            <div class="stat-item">
-                <div class="stat-number" data-counter="350">0</div>
-                <p class="stat-text">Студентов ежегодно</p>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-counter="25">0</div>
-                <p class="stat-text">Компаний-партнеров</p>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-counter="90">0</div>
-                <p class="stat-text">% трудоустройства</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="about-advantages">
-    <h2 class="section-title">Преимущества двойного образования</h2>
-    
-    <div class="advantage-container">
-        <div class="advantage-item">
-            <div class="advantage-icon">
-                <i class="fas fa-briefcase"></i>
-            </div>
-            <h3>Опыт работы</h3>
-            <p>Студенты получают реальный опыт работы и практические навыки еще во время обучения</p>
-        </div>
-        
-        <div class="advantage-item">
-            <div class="advantage-icon">
-                <i class="fas fa-money-bill-wave"></i>
-            </div>
-            <h3>Стипендия</h3>
-            <p>Оплачиваемая практика на предприятиях-партнерах во время обучения</p>
-        </div>
-        
-        <div class="advantage-item">
-            <div class="advantage-icon">
-                <i class="fas fa-user-tie"></i>
-            </div>
-            <h3>Трудоустройство</h3>
-            <p>Высокие шансы на трудоустройство после завершения обучения</p>
-        </div>
-        
-        <div class="advantage-item">
-            <div class="advantage-icon">
-                <i class="fas fa-lightbulb"></i>
-            </div>
-            <h3>Актуальные знания</h3>
-            <p>Учебные программы, разработанные в сотрудничестве с работодателями</p>
-        </div>
-        
-        <div class="advantage-item">
-            <div class="advantage-icon">
-                <i class="fas fa-hands-helping"></i>
-            </div>
-            <h3>Наставничество</h3>
-            <p>Персональные наставники из числа опытных сотрудников компаний</p>
-        </div>
-        
-        <div class="advantage-item">
-            <div class="advantage-icon">
-                <i class="fas fa-network-wired"></i>
-            </div>
-            <h3>Связи</h3>
-            <p>Построение профессиональных связей и знакомство с индустрией</p>
-        </div>
-    </div>
-</section>
-
-<section class="about-timeline">
-    <h2 class="section-title">История двойного образования в Молдове</h2>
-    
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">2016</div>
-            <div class="timeline-content">
-                <h3>Начало инициативы</h3>
-                <p>Разработка концепции двойного образования в Молдове совместно с европейскими партнерами</p>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">2018</div>
-            <div class="timeline-content">
-                <h3>Запуск первых программ</h3>
-                <p>Начало реализации пилотных программ двойного образования в IT и инженерных специальностях</p>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">2020</div>
-            <div class="timeline-content">
-                <h3>Расширение направлений</h3>
-                <p>Добавление новых специальностей и увеличение числа компаний-партнеров</p>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">2022</div>
-            <div class="timeline-content">
-                <h3>Национальный статус</h3>
-                <p>Официальное признание программы двойного образования на государственном уровне</p>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">2023</div>
-            <div class="timeline-content">
-                <h3>Международное сотрудничество</h3>
-                <p>Интеграция с европейскими стандартами и расширение международного сотрудничества</p>
+            <div class="col-lg-6">
+                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="{{ url_for('static', filename='img/about.png') }}">
             </div>
         </div>
     </div>
-</section>
+</div>
+<!-- About End -->
 
-<section class="team">
-    <h2 class="section-title">Наша команда</h2>
-    
-    <div class="team-members">
-        <div class="team-member">
-            <div class="member-photo" style="background-image: url('/static/img/team1.jpg');"></div>
-            <h3>Александр Петров</h3>
-            <p class="member-position">Директор программы</p>
-            <ul class="member-social">
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fas fa-envelope"></i></a></li>
-            </ul>
-        </div>
-        
-        <div class="team-member">
-            <div class="member-photo" style="background-image: url('/static/img/team2.jpg');"></div>
-            <h3>Елена Иванова</h3>
-            <p class="member-position">Координатор учебных программ</p>
-            <ul class="member-social">
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fas fa-envelope"></i></a></li>
-            </ul>
-        </div>
-        
-        <div class="team-member">
-            <div class="member-photo" style="background-image: url('/static/img/team3.jpg');"></div>
-            <h3>Михаил Морару</h3>
-            <p class="member-position">Руководитель партнерской сети</p>
-            <ul class="member-social">
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fas fa-envelope"></i></a></li>
-            </ul>
-        </div>
-        
-        <div class="team-member">
-            <div class="member-photo" style="background-image: url('/static/img/team4.jpg');"></div>
-            <h3>Анна Кристя</h3>
-            <p class="member-position">Менеджер студенческих программ</p>
-            <ul class="member-social">
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fas fa-envelope"></i></a></li>
-            </ul>
+
+<!-- Facts Start -->
+<div class="container-xxl bg-primary fact py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5 px-lg-5">
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
+                <i class="fa fa-certificate fa-3x text-secondary mb-3"></i>
+                <h1 class="text-white mb-2" data-toggle="counter-up">1234</h1>
+                <p class="text-white mb-0">Years Experience</p>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
+                <i class="fa fa-users-cog fa-3x text-secondary mb-3"></i>
+                <h1 class="text-white mb-2" data-toggle="counter-up">1234</h1>
+                <p class="text-white mb-0">Team Members</p>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
+                <i class="fa fa-users fa-3x text-secondary mb-3"></i>
+                <h1 class="text-white mb-2" data-toggle="counter-up">1234</h1>
+                <p class="text-white mb-0">Satisfied Clients</p>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
+                <i class="fa fa-check fa-3x text-secondary mb-3"></i>
+                <h1 class="text-white mb-2" data-toggle="counter-up">1234</h1>
+                <p class="text-white mb-0">Compleate Projects</p>
+            </div>
         </div>
     </div>
-</section>
+</div>
+<!-- Facts End -->
 
-<section class="cta-section">
-    <h2>Присоединяйтесь к будущему образования!</h2>
-    <p>Начните свой путь в профессии с программой двойного образования в Молдове</p>
-    <a href="/apply" class="btn btn-lg btn-primary animated-btn">Подать заявку</a>
-</section>
+
+<!-- Team Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="section-title text-secondary justify-content-center"><span></span>Our Team<span></span></p>
+            <h1 class="text-center mb-5">Our Team Members</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="team-item bg-light rounded">
+                    <div class="text-center border-bottom p-4">
+                        <img class="img-fluid rounded-circle mb-4" src="{{ url_for('static', filename='img/team-1.jpg') }}" alt="">
+                        <h5>John Doe</h5>
+                        <span>CEO & Founder</span>
+                    </div>
+                    <div class="d-flex justify-content-center p-4">
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="team-item bg-light rounded">
+                    <div class="text-center border-bottom p-4">
+                        <img class="img-fluid rounded-circle mb-4" src="{{ url_for('static', filename='img/team-2.jpg') }}" alt="">
+                        <h5>Jessica Brown</h5>
+                        <span>Web Designer</span>
+                    </div>
+                    <div class="d-flex justify-content-center p-4">
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="team-item bg-light rounded">
+                    <div class="text-center border-bottom p-4">
+                        <img class="img-fluid rounded-circle mb-4" src="{{ url_for('static', filename='img/team-3.jpg') }}" alt="">
+                        <h5>Tony Johnson</h5>
+                        <span>SEO Expert</span>
+                    </div>
+                    <div class="d-flex justify-content-center p-4">
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Team End -->
 {% endblock %} 

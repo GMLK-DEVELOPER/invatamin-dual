@@ -1,460 +1,779 @@
+/********** Template CSS **********/
 :root {
-    --primary-color: #8c00ff;
-    --primary-light: #b459ff;
-    --primary-dark: #6a00cc;
-    --secondary-color: #430074;
-    --dark-color: #1a0033;
-    --light-color: #f5f0ff;
-    --black: #0a0014;
-    --gray: #666;
-    --light-gray: #f0f0f0;
-    --animation-time: 0.3s;
-    --font-main: 'Roboto', sans-serif;
-    --font-heading: 'Montserrat', sans-serif;
+    --primary: #6222CC;    /* Фиолетовый цвет */
+    --secondary: #FBA504;  /* Оранжевый цвет */
+    --light: #F6F4F9;      /* Светлый цвет */
+    --dark: #04000B;       /* Темный цвет */
 }
 
-/* Imports */
-@import url('navbar.css');
-@import url('components.css');
-@import url('pages.css');
-@import url('footer.css');
-
-/* General Styles */
-* {
+/* Убираем белые края с сайта */
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    overflow-x: hidden;
+    position: relative;
+    background-color: #fff;
 }
 
-body {
-    font-family: var(--font-main);
-    background-color: var(--black);
-    color: var(--light-color);
-    line-height: 1.6;
-    overflow-x: hidden;
+.container-xxl {
+    padding-left: 0;
+    padding-right: 0;
+    overflow: visible;
+    max-width: 100%;
     position: relative;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    margin-bottom: 1.2rem;
-    font-weight: 700;
-    line-height: 1.3;
+.container-xxl.bg-white {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    z-index: 0;
 }
 
-h1 {
-    font-size: 2.6rem;
+/* Добавляем отступы для внутренних контейнеров */
+.container-xxl .container,
+.container-xxl .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-h2 {
-    font-size: 2.2rem;
+@media (min-width: 576px) {
+    .container-xxl .container {
+        max-width: 540px;
+    }
 }
 
-h3 {
-    font-size: 1.8rem;
+@media (min-width: 768px) {
+    .container-xxl .container {
+        max-width: 720px;
+    }
 }
 
-p {
-    margin-bottom: 1rem;
+@media (min-width: 992px) {
+    .container-xxl .container {
+        max-width: 960px;
+    }
 }
 
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color var(--animation-time) ease;
+@media (min-width: 1200px) {
+    .container-xxl .container {
+        max-width: 1140px;
+    }
 }
 
-a:hover {
-    color: var(--primary-light);
+@media (min-width: 1400px) {
+    .container-xxl .container {
+        max-width: 1320px;
+    }
 }
 
-ul {
-    list-style: none;
+/* Фиксированные стили для устранения белых краев и проблем на мобильных устройствах */
+html, body {
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Дополнительный важный фикс для контента */
+.container-xxl > div.content-wrapper {
+    background-color: #fff;
+    position: relative;
+    z-index: 10;
+    display: block !important;
+    visibility: visible !important;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Фикс для мобильных устройств */
+@media (max-width: 767.98px) {
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+    
+    .container, .container-fluid {
+        max-width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .row {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+    
+    .col, [class*="col-"] {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    
+    /* Исправление для мобильных устройств */
+    .content-wrapper {
+        padding-top: 20px;
+        margin-top: -20px;
+    }
+    
+    /* Фикс для мобильных фонов */
+    .hero-header {
+        background-size: 150px, 150px, 150px, 150px, 200px, 100% auto !important;
+    }
+}
+
+/* Фикс для отображения основного контента */
+.container-xxl .container-xxl {
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: visible;
+}
+
+.bg-primary {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.bg-white {
+    overflow-x: hidden;
 }
 
 img {
     max-width: 100%;
+    height: auto;
 }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+/* Исправляем проблемы с волнистыми фонами */
+.container-xxl [class^="blob-"] {
+    background-size: contain !important;
 }
 
-.section-title {
-    text-align: center;
-    margin-bottom: 2.5rem;
+/*** Spinner ***/
+#spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
+}
+
+#spinner.show {
+    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 1;
+}
+
+.back-to-top {
+    position: fixed;
+    display: none;
+    right: 45px;
+    bottom: 45px;
+    z-index: 99;
+}
+
+
+/*** Heading ***/
+h1,
+h2,
+.fw-bold {
+    font-weight: 700 !important;
+}
+
+h3,
+h4,
+.fw-semi-bold {
+    font-weight: 600 !important;
+}
+
+h5,
+h6,
+.fw-medium {
+    font-weight: 500 !important;
+}
+
+
+/*** Button ***/
+.btn {
+    font-weight: 500;
+    transition: .5s;
+}
+
+.btn:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+}
+
+.btn-square {
+    width: 38px;
+    height: 38px;
+}
+
+.btn-sm-square {
+    width: 32px;
+    height: 32px;
+}
+
+.btn-lg-square {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+    border-radius: 50px;
+}
+
+
+/*** Navbar ***/
+.navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f067";
+    font-family: "Font Awesome 5 Free";
+    font-size: 10px;
+    font-weight: bold;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.navbar-light .navbar-nav .nav-link {
     position: relative;
-    padding-bottom: 1rem;
+    margin-right: 25px;
+    padding: 35px 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--light) !important;
+    outline: none;
+    transition: .5s;
 }
 
-.section-title::after {
-    content: '';
+.sticky-top.navbar-light .navbar-nav .nav-link {
+    padding: 20px 0;
+    color: var(--dark) !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+    color: #6222CC(--secondary) !important;
+}
+
+.navbar-light .navbar-brand h1 {
+    color: #FFFFFF;
+}
+
+.navbar-light .navbar-brand img {
+    max-height: 60px;
+    transition: .5s;
+}
+
+.sticky-top.navbar-light .navbar-brand img {
+    max-height: 45px;
+}
+
+@media (max-width: 991.98px) {
+    .sticky-top.navbar-light {
+        position: relative;
+        background: #FFFFFF;
+    }
+
+    .navbar-light .navbar-collapse {
+        margin-top: 15px;
+        border-top: 1px solid #DDDDDD;
+    }
+
+    .navbar-light .navbar-nav .nav-link,
+    .sticky-top.navbar-light .navbar-nav .nav-link {
+        padding: 10px 0;
+        margin-left: 0;
+        color: var(--dark) !important;
+    }
+
+    .navbar-light .navbar-brand h1 {
+        color: var(--primary);
+    }
+
+    .navbar-light .navbar-brand img {
+        max-height: 45px;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-light {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid rgba(256, 256, 256, .1);
+        z-index: 999;
+    }
+    
+    .sticky-top.navbar-light {
+        position: fixed;
+        background: #FFFFFF;
+    }
+
+    .sticky-top.navbar-light .navbar-brand h1 {
+        color: var(--primary);
+    }
+
+    .navbar-light .navbar-nav .nav-item .dropdown-menu {
+        display: block;
+        border: none;
+        margin-top: 0;
+        top: 150%;
+        opacity: 0;
+        visibility: hidden;
+        transition: .5s;
+    }
+
+    .navbar-light .navbar-nav .nav-item:hover .dropdown-menu {
+        top: 100%;
+        visibility: visible;
+        transition: .5s;
+        opacity: 1;
+    }
+
+    .navbar-light .btn {
+        color: var(--dark);
+        background: #FFFFFF;
+    }
+
+    .sticky-top.navbar-light .btn {
+        color: var(--dark);
+        background: var(--secondary);
+    }
+}
+
+
+/*** Hero Header ***/
+.hero-header {
+    margin-bottom: 6rem;
+    padding: 18rem 0;
+    background:
+        url(../img/blob-top-left.png),
+        url(../img/blob-top-right.png),
+        url(../img/blob-bottom-left.png),
+        url(../img/blob-bottom-right.png),
+        url(../img/blob-center.png),
+        url(../img/bg-bottom.png);
+    background-position:
+        left 0px top 0px,
+        right 0px top 0px,
+        left 0px bottom 0px,
+        right 0px bottom 0px,
+        center center,
+        center bottom;
+    background-repeat: no-repeat;
+    background-size: contain, contain, contain, contain, contain, 100% auto;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+@media (max-width: 991.98px) {
+    .hero-header {
+        padding: 6rem 0 9rem 0;
+    }
+}
+
+
+/*** Section Title ***/
+.section-title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.section-title span:first-child,
+.section-title span:last-child {
+    position: relative;
+    display: inline-block;
+    margin-right: 30px;
+    width: 30px;
+    height: 2px;
+}
+
+.section-title span:last-child {
+    margin-right: 0;
+    margin-left: 30px;
+}
+
+.section-title span:first-child::after,
+.section-title span:last-child::after {
     position: absolute;
-    bottom: 0;
+    content: "";
+    width: 15px;
+    height: 2px;
+    top: 0;
+    right: -20px;
+}
+
+.section-title span:last-child::after {
+    right: auto;
+    left: -20px;
+}
+
+.section-title.text-primary span:first-child,
+.section-title.text-primary span:last-child,
+.section-title.text-primary span:first-child::after,
+.section-title.text-primary span:last-child::after {
+    background: var(--primary);
+}
+
+.section-title.text-secondary span:first-child,
+.section-title.text-secondary span:last-child,
+.section-title.text-secondary span:first-child::after,
+.section-title.text-secondary span:last-child::after {
+    background: var(--secondary);
+}
+
+.section-title.text-white span:first-child,
+.section-title.text-white span:last-child,
+.section-title.text-white span:first-child::after,
+.section-title.text-white span:last-child::after {
+    background: #FFFFFF;
+}
+
+
+/*** Feature ***/
+.feature-item {
+    transition: .5s;
+}
+
+.feature-item:hover {
+    margin-top: -15px;
+}
+
+
+/*** About ***/
+.progress {
+    height: 5px;
+}
+
+.progress .progress-bar {
+    width: 0px;
+    transition: 3s;
+}
+
+
+/*** Fact ***/
+.fact {
+    margin: 6rem 0;
+    background:
+        url(../img/blob-top-left.png),
+        url(../img/blob-top-right.png),
+        url(../img/blob-bottom-left.png),
+        url(../img/blob-bottom-right.png),
+        url(../img/blob-center.png);
+    background-position:
+        left 0px top 0px,
+        right 0px top 0px,
+        left 0px bottom 0px,
+        right 0px bottom 0px,
+        center center;
+    background-repeat: no-repeat;
+}
+
+
+/*** Service ***/
+.service-item {
+    position: relative;
+    padding: 45px 30px;
+    background: var(--light);
+    overflow: hidden;
+    transition: .5s;
+}
+
+.service-item:hover {
+    margin-top: -15px;
+    padding-bottom: 60px;
+    background: var(--primary);
+}
+
+.service-item .service-icon {
+    margin: 0 auto 20px auto;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    background: url(../img/blob-primary.png) center center no-repeat;
+    background-size: contain;
+    transition: .5s;
+}
+
+.service-item:hover .service-icon {
+    color: var(--dark);
+    background: url(../img/blob-secondary.png) center center no-repeat;
+    background-size: contain;
+}
+
+.service-item h5,
+.service-item p {
+    transition: .5s;
+}
+
+.service-item:hover h5,
+.service-item:hover p {
+    color: #FFFFFF;
+}
+
+.service-item a.btn {
+    position: absolute;
+    bottom: -40px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-dark), var(--primary-color), var(--primary-light));
+    color: var(--primary);
+    background: #FFFFFF;
+    border-radius: 40px 40px 0 0;
+    transition: .5s;
+    z-index: 1;
 }
 
-section {
-    padding: 5rem 0;
+.service-item a.btn:hover {
+    color: var(--dark);
+    background: var(--secondary);
 }
 
-.btn {
+.service-item:hover a.btn {
+    bottom: 0;
+}
+
+
+/*** Project Portfolio ***/
+#portfolio-flters li {
     display: inline-block;
-    padding: 0.8rem 1.8rem;
-    border-radius: 50px;
-    font-weight: 600;
+    font-weight: 500;
+    color: var(--dark);
     cursor: pointer;
-    transition: all var(--animation-time) ease;
-    text-align: center;
-    border: none;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: .5s;
+    border-bottom: 2px solid transparent;
 }
 
-.btn::before {
-    content: '';
+#portfolio-flters li:hover,
+#portfolio-flters li.active {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.portfolio-item img {
+    transition: .5s;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+}
+
+.portfolio-item .portfolio-overlay {
     position: absolute;
-    top: 0;
-    left: -100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: all 0.6s ease;
+    top: 0;
+    left: 0;
+    background: rgba(98, 34, 204, .9);
+    transition: .5s;
+    opacity: 0;
 }
 
-.btn:hover::before {
-    left: 100%;
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
 }
 
-.btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    color: white;
+
+/*** Newsletter ***/
+.newsletter {
+    margin: 6rem 0;
+    background:
+        url(../img/blob-top-left.png),
+        url(../img/blob-top-right.png),
+        url(../img/blob-bottom-left.png),
+        url(../img/blob-bottom-right.png),
+        url(../img/blob-center.png);
+    background-position:
+        left 0px top 0px,
+        right 0px top 0px,
+        left 0px bottom 0px,
+        right 0px bottom 0px,
+        center center;
+    background-repeat: no-repeat;
 }
 
-.btn-primary:hover {
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-    color: white;
-    transform: translateY(-3px);
+
+/*** Testimonial ***/
+.testimonial-carousel .testimonial-item {
+    padding: 0 30px 30px 30px;
 }
 
-.btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--light-color);
-    border: 1px solid var(--primary-color);
+.testimonial-carousel .owl-nav {
+    display: flex;
+    justify-content: center;
 }
 
-.btn-secondary:hover {
-    background: rgba(140, 0, 255, 0.1);
-    color: var(--light-color);
-    transform: translateY(-3px);
+.testimonial-carousel .owl-nav .owl-prev,
+.testimonial-carousel .owl-nav .owl-next {
+    margin: 0 12px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    background: var(--light);
+    border-radius: 60px;
+    font-size: 22px;
+    transition: .5s;
 }
 
-.btn-lg {
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
+.testimonial-carousel .owl-nav .owl-prev:hover,
+.testimonial-carousel .owl-nav .owl-next:hover {
+    color: #FFFFFF;
+    background: var(--primary);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
 }
 
-.btn-sm {
-    padding: 0.5rem 1.2rem;
-    font-size: 0.9rem;
+
+/*** Team ***/
+.team-item .btn {
+    color: var(--primary);
+    background: #FFFFFF;
 }
 
-.btn-block {
-    display: block;
+.team-item .btn:hover {
+    color: #FFFFFF;
+    background: var(--primary);
+}
+
+
+/*** Footer ***/
+.footer {
+    margin-top: 6rem;
+    padding-top: 9rem;
+    background:
+        url(../img/bg-top.png),
+        url(../img/map.png);
+    background-position:
+        center top,
+        center center;
+    background-repeat: no-repeat;
+    background-size: 100% auto, contain;
     width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.animated-btn {
+.footer .btn.btn-social {
+    margin-right: 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    border: 1px solid rgba(256, 256, 256, .1);
+    border-radius: 40px;
+    transition: .3s;
+}
+
+.footer .btn.btn-social:hover {
+    color: var(--primary);
+}
+
+.footer .btn.btn-link {
+    display: block;
+    margin-bottom: 10px;
+    padding: 0;
+    text-align: left;
+    color: var(--light);
+    font-weight: normal;
+    transition: .3s;
+}
+
+.footer .btn.btn-link::before {
+    position: relative;
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.footer .btn.btn-link:hover {
+    letter-spacing: 1px;
+    box-shadow: none;
+    color: var(--secondary);
+}
+
+.footer .copyright {
+    padding: 25px 0;
+    font-size: 14px;
+    border-top: 1px solid rgba(256, 256, 256, .1);
+}
+
+.footer .copyright a {
+    color: var(--light);
+}
+
+.footer .footer-menu a {
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255, 255, 255, .1);
+}
+
+.footer .footer-menu a:last-child {
+    margin-right: 0;
+    padding-right: 0;
+    border-right: none;
+}
+
+.footer .copyright a:hover,
+.footer .footer-menu a:hover {
+    color: var(--secondary);
+}
+
+/* Стили для обертки контента */
+.content-wrapper {
     position: relative;
     z-index: 1;
-    overflow: hidden;
-}
-
-.animated-btn::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-    z-index: -2;
+    overflow: visible;
+    min-height: 500px; /* Минимальная высота для контента */
+    background-color: #fff;
 }
 
-.animated-btn::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-    transition: all 0.4s;
-    z-index: -1;
-}
-
-.animated-btn:hover::before {
-    width: 100%;
-}
-
-/* Background animation */
-.background-animation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(135deg, var(--black), var(--dark-color));
-}
-
-/* Glitch text effect */
-.glitch-text {
+/* Исправляем отображение контейнеров и z-index */
+.container-xxl > .container-fluid,
+.content-wrapper > .container-fluid {
     position: relative;
-    color: var(--light-color);
-    font-weight: 800;
-    text-shadow: 0 0 10px rgba(140, 0, 255, 0.5);
-    animation: glitch-skew 1s infinite linear alternate-reverse;
+    z-index: 5;
 }
 
-.glitch-text::before,
-.glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+/* Правки для фонов, чтобы они не перекрывали контент */
+.bg-primary, 
+.hero-header, 
+.footer {
+    position: relative;
+    z-index: 0;
 }
 
-.glitch-text::before {
-    left: 2px;
-    text-shadow: -2px 0 var(--primary-color);
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
-}
+/* Стили для основного контента */
+.main-content-section {
+    position: relative;
+    z-index: 10;
+    background-color: #fff;
 
-.glitch-text::after {
-    left: -2px;
-    text-shadow: -2px 0 var(--secondary-color);
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim2 5s infinite linear alternate-reverse;
 }
-
-@keyframes glitch-anim {
-    0% {
-        clip: rect(14px, 9999px, 76px, 0);
-        transform: skew(0.45deg);
-    }
-    5% {
-        clip: rect(89px, 9999px, 99px, 0);
-        transform: skew(0.92deg);
-    }
-    10% {
-        clip: rect(74px, 9999px, 46px, 0);
-        transform: skew(0.56deg);
-    }
-    15% {
-        clip: rect(86px, 9999px, 82px, 0);
-        transform: skew(0.08deg);
-    }
-    20% {
-        clip: rect(29px, 9999px, 91px, 0);
-        transform: skew(0.66deg);
-    }
-    25% {
-        clip: rect(53px, 9999px, 98px, 0);
-        transform: skew(0.6deg);
-    }
-    30% {
-        clip: rect(59px, 9999px, 84px, 0);
-        transform: skew(0.54deg);
-    }
-    35% {
-        clip: rect(19px, 9999px, 18px, 0);
-        transform: skew(0.55deg);
-    }
-    40% {
-        clip: rect(70px, 9999px, 98px, 0);
-        transform: skew(0.71deg);
-    }
-    45% {
-        clip: rect(40px, 9999px, 40px, 0);
-        transform: skew(0.36deg);
-    }
-    50% {
-        clip: rect(30px, 9999px, 73px, 0);
-        transform: skew(0.77deg);
-    }
-    55% {
-        clip: rect(67px, 9999px, 15px, 0);
-        transform: skew(0.07deg);
-    }
-    60% {
-        clip: rect(32px, 9999px, 26px, 0);
-        transform: skew(0.52deg);
-    }
-    65% {
-        clip: rect(13px, 9999px, 40px, 0);
-        transform: skew(0.6deg);
-    }
-    70% {
-        clip: rect(35px, 9999px, 19px, 0);
-        transform: skew(0.41deg);
-    }
-    75% {
-        clip: rect(89px, 9999px, 11px, 0);
-        transform: skew(0.23deg);
-    }
-    80% {
-        clip: rect(2px, 9999px, 35px, 0);
-        transform: skew(0.66deg);
-    }
-    85% {
-        clip: rect(91px, 9999px, 96px, 0);
-        transform: skew(0.29deg);
-    }
-    90% {
-        clip: rect(75px, 9999px, 68px, 0);
-        transform: skew(0.43deg);
-    }
-    95% {
-        clip: rect(29px, 9999px, 98px, 0);
-        transform: skew(0.58deg);
-    }
-    100% {
-        clip: rect(87px, 9999px, 51px, 0);
-        transform: skew(0.09deg);
-    }
-}
-
-@keyframes glitch-anim2 {
-    0% {
-        clip: rect(47px, 9999px, 45px, 0);
-        transform: skew(0.76deg);
-    }
-    5% {
-        clip: rect(38px, 9999px, 95px, 0);
-        transform: skew(0.06deg);
-    }
-    10% {
-        clip: rect(54px, 9999px, 96px, 0);
-        transform: skew(0.32deg);
-    }
-    15% {
-        clip: rect(30px, 9999px, 96px, 0);
-        transform: skew(0.77deg);
-    }
-    20% {
-        clip: rect(44px, 9999px, 52px, 0);
-        transform: skew(0.81deg);
-    }
-    25% {
-        clip: rect(3px, 9999px, 97px, 0);
-        transform: skew(0.67deg);
-    }
-    30% {
-        clip: rect(62px, 9999px, 43px, 0);
-        transform: skew(0.06deg);
-    }
-    35% {
-        clip: rect(21px, 9999px, 94px, 0);
-        transform: skew(0.07deg);
-    }
-    40% {
-        clip: rect(95px, 9999px, 100px, 0);
-        transform: skew(0.7deg);
-    }
-    45% {
-        clip: rect(99px, 9999px, 23px, 0);
-        transform: skew(0.11deg);
-    }
-    50% {
-        clip: rect(58px, 9999px, 10px, 0);
-        transform: skew(0.63deg);
-    }
-    55% {
-        clip: rect(97px, 9999px, 14px, 0);
-        transform: skew(0.57deg);
-    }
-    60% {
-        clip: rect(84px, 9999px, 89px, 0);
-        transform: skew(0.23deg);
-    }
-    65% {
-        clip: rect(66px, 9999px, 17px, 0);
-        transform: skew(0.33deg);
-    }
-    70% {
-        clip: rect(70px, 9999px, 53px, 0);
-        transform: skew(0.2deg);
-    }
-    75% {
-        clip: rect(33px, 9999px, 52px, 0);
-        transform: skew(0.25deg);
-    }
-    80% {
-        clip: rect(47px, 9999px, 36px, 0);
-        transform: skew(0.87deg);
-    }
-    85% {
-        clip: rect(61px, 9999px, 66px, 0);
-        transform: skew(0.93deg);
-    }
-    90% {
-        clip: rect(26px, 9999px, 93px, 0);
-        transform: skew(0.75deg);
-    }
-    95% {
-        clip: rect(47px, 9999px, 73px, 0);
-        transform: skew(0.08deg);
-    }
-    100% {
-        clip: rect(93px, 9999px, 100px, 0);
-        transform: skew(0.02deg);
-    }
-}
-
-@keyframes glitch-skew {
-    0% {
-        transform: skew(-1deg);
-    }
-    10% {
-        transform: skew(0.5deg);
-    }
-    20% {
-        transform: skew(0.7deg);
-    }
-    30% {
-        transform: skew(0.3deg);
-    }
-    40% {
-        transform: skew(-0.4deg);
-    }
-    50% {
-        transform: skew(-0.9deg);
-    }
-    60% {
-        transform: skew(0.2deg);
-    }
-    70% {
-        transform: skew(0.6deg);
-    }
-    80% {
-        transform: skew(-0.2deg);
-    }
-    90% {
-        transform: skew(0.8deg);
-    }
-    100% {
-        transform: skew(-1deg);
-    }
-} 
