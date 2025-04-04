@@ -1,0 +1,436 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Media Library - Admin Panel{% endblock %}
+
+{% block page_title %}Media Library{% endblock %}
+
+{% block breadcrumb_items %}
+<li class="breadcrumb-item"><a href="{{ url_for('admin_dashboard') }}">Dashboard</a></li>
+<li class="breadcrumb-item active">Media Library</li>
+{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Upload New Media</h5>
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#uploadCollapse" aria-expanded="false">
+                    <i class="fas fa-plus"></i> New Upload
+                </button>
+            </div>
+            <div class="collapse" id="uploadCollapse">
+                <div class="card-body">
+                    <form action="{{ url_for('admin_media_library') }}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="file_upload" class="form-label">Choose File</label>
+                                    <input class="form-control" type="file" id="file_upload" name="file" required>
+                                    <div class="form-text">Supported formats: JPG, PNG, GIF, PDF, MP4, MP3. Max size: 50MB</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="file_title" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="file_title" name="title" placeholder="Enter file title">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file_description" class="form-label">Description</label>
+                            <textarea class="form-control" id="file_description" name="description" rows="2" placeholder="Enter file description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file_category" class="form-label">Category</label>
+                            <select class="form-select" id="file_category" name="category">
+                                <option value="image">Image</option>
+                                <option value="document">Document</option>
+                                <option value="video">Video</option>
+                                <option value="audio">Audio</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file_tags" class="form-label">Tags</label>
+                            <input type="text" class="form-control" id="file_tags" name="tags" placeholder="Enter tags separated by commas">
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#uploadCollapse">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Upload File</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Media Files</h5>
+                <div>
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm" placeholder="Search files..." id="mediaSearch">
+                        <button class="btn btn-outline-secondary btn-sm" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary active filter-btn" data-filter="all">All</button>
+                        <button type="button" class="btn btn-outline-primary filter-btn" data-filter="image">Images</button>
+                        <button type="button" class="btn btn-outline-primary filter-btn" data-filter="document">Documents</button>
+                        <button type="button" class="btn btn-outline-primary filter-btn" data-filter="video">Videos</button>
+                        <button type="button" class="btn btn-outline-primary filter-btn" data-filter="audio">Audio</button>
+                    </div>
+                </div>
+                
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                
+                <div class="row media-items">
+                    {% if media_files %}
+                        {% for file in media_files %}
+                            <div class="col-md-3 col-lg-2 mb-4 media-item" data-type="{{ file.type }}">
+                                <div class="card h-100">
+                                    <div class="card-img-top media-preview">
+                                        {% if file.type == 'image' %}
+                                            <img src="{{ file.url }}" class="img-fluid" alt="{{ file.title }}">
+                                        {% elif file.type == 'video' %}
+                                            <div class="position-relative video-thumbnail">
+                                                <img src="{{ file.thumbnail }}" class="img-fluid" alt="{{ file.title }}">
+                                                <div class="position-absolute top-50 start-50 translate-middle play-icon">
+                                                    <i class="fas fa-play-circle fa-2x text-white"></i>
+                                                </div>
+                                            </div>
+                                        {% elif file.type == 'audio' %}
+                                            <div class="d-flex justify-content-center align-items-center bg-light" style="height: 120px;">
+                                                <i class="fas fa-file-audio fa-3x text-primary"></i>
+                                            </div>
+                                        {% elif file.type == 'document' %}
+                                            <div class="d-flex justify-content-center align-items-center bg-light" style="height: 120px;">
+                                                <i class="fas fa-file-pdf fa-3x text-danger"></i>
+                                            </div>
+                                        {% else %}
+                                            <div class="d-flex justify-content-center align-items-center bg-light" style="height: 120px;">
+                                                <i class="fas fa-file fa-3x text-secondary"></i>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title text-truncate mb-0" title="{{ file.title }}">{{ file.title }}</h6>
+                                        <p class="card-text"><small class="text-muted">{{ file.size_human }}</small></p>
+                                    </div>
+                                    <div class="card-footer p-2 bg-white">
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#mediaModal{{ file.id }}">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-info copy-url" data-url="{{ file.url }}">
+                                                <i class="fas fa-link"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ file.id }}">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Preview Modal -->
+                                <div class="modal fade" id="mediaModal{{ file.id }}" tabindex="-1" aria-labelledby="mediaModalLabel{{ file.id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="mediaModalLabel{{ file.id }}">{{ file.title }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="media-preview-large">
+                                                            {% if file.type == 'image' %}
+                                                                <img src="{{ file.url }}" class="img-fluid" alt="{{ file.title }}">
+                                                            {% elif file.type == 'video' %}
+                                                                <video controls class="w-100">
+                                                                    <source src="{{ file.url }}" type="video/mp4">
+                                                                    Your browser does not support the video tag.
+                                                                </video>
+                                                            {% elif file.type == 'audio' %}
+                                                                <audio controls class="w-100">
+                                                                    <source src="{{ file.url }}" type="audio/mpeg">
+                                                                    Your browser does not support the audio element.
+                                                                </audio>
+                                                            {% elif file.type == 'document' %}
+                                                                <div class="ratio ratio-16x9">
+                                                                    <iframe src="{{ file.url }}" allowfullscreen></iframe>
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="d-flex justify-content-center align-items-center bg-light" style="height: 300px;">
+                                                                    <i class="fas fa-file fa-5x text-secondary"></i>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h6>File Information</h6>
+                                                        <dl>
+                                                            <dt>Filename</dt>
+                                                            <dd>{{ file.filename }}</dd>
+                                                            <dt>Upload Date</dt>
+                                                            <dd>{{ file.created_at.strftime('%Y-%m-%d %H:%M') }}</dd>
+                                                            <dt>File Size</dt>
+                                                            <dd>{{ file.size_human }}</dd>
+                                                            <dt>File Type</dt>
+                                                            <dd>{{ file.mime_type }}</dd>
+                                                            <dt>Description</dt>
+                                                            <dd>{{ file.description or 'No description' }}</dd>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <a href="{{ file.url }}" download="{{ file.filename }}" class="btn btn-primary">Download</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Delete Modal -->
+                                <div class="modal fade" id="deleteModal{{ file.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ file.id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteModalLabel{{ file.id }}">Confirm Delete</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete <strong>{{ file.title }}</strong>? This action cannot be undone.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <form action="{{ url_for('admin_media_delete', file_id=file.id) }}" method="post">
+                                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i> No media files found. Upload new files using the form above.
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                {% if pagination %}
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if pagination.has_prev %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('admin_media_library', page=pagination.prev_num) }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        
+                        {% for page in pagination.iter_pages() %}
+                            {% if page %}
+                                {% if page != pagination.page %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('admin_media_library', page=page) }}">{{ page }}</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">{{ page }}</a>
+                                </li>
+                                {% endif %}
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">...</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if pagination.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('admin_media_library', page=pagination.next_num) }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const mediaItems = document.querySelectorAll('.media-item');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Show/hide items based on filter
+            mediaItems.forEach(item => {
+                if (filterValue === 'all' || item.getAttribute('data-type') === filterValue) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // Search functionality
+    const searchInput = document.getElementById('mediaSearch');
+    if (searchInput) {
+        searchInput.addEventListener('keyup', function() {
+            const searchText = this.value.toLowerCase();
+            
+            mediaItems.forEach(item => {
+                const title = item.querySelector('.card-title').textContent.toLowerCase();
+                if (title.includes(searchText)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    }
+    
+    // Copy URL functionality
+    const copyButtons = document.querySelectorAll('.copy-url');
+    copyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            navigator.clipboard.writeText(url).then(() => {
+                // Create tooltip
+                this.setAttribute('data-bs-toggle', 'tooltip');
+                this.setAttribute('data-bs-placement', 'top');
+                this.setAttribute('title', 'URL Copied!');
+                
+                // Initialize and show tooltip
+                const tooltip = new bootstrap.Tooltip(this);
+                tooltip.show();
+                
+                // Hide tooltip after 1.5 seconds
+                setTimeout(() => {
+                    tooltip.hide();
+                }, 1500);
+            });
+        });
+    });
+    
+    // File upload preview
+    const fileUpload = document.getElementById('file_upload');
+    if (fileUpload) {
+        fileUpload.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const fileType = file.type.split('/')[0];
+                const category = document.getElementById('file_category');
+                
+                // Auto-select file category based on file type
+                if (fileType === 'image') {
+                    category.value = 'image';
+                } else if (fileType === 'video') {
+                    category.value = 'video';
+                } else if (fileType === 'audio') {
+                    category.value = 'audio';
+                } else if (file.type === 'application/pdf' || file.type.includes('document')) {
+                    category.value = 'document';
+                } else {
+                    category.value = 'other';
+                }
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
+
+{% block custom_styles %}
+<style>
+.media-preview {
+    height: 120px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+
+.media-preview img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.video-thumbnail {
+    height: 100%;
+}
+
+.video-thumbnail img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.8);
+}
+
+.play-icon {
+    opacity: 0.8;
+}
+
+.media-preview-large {
+    max-height: 400px;
+    overflow: auto;
+    margin-bottom: 20px;
+}
+</style>
+{% endblock %} 

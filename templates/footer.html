@@ -1,0 +1,492 @@
+<!-- Footer Start -->
+<div class="container-fluid ps3-footer position-relative overflow-hidden pt-5 wow fadeIn" data-wow-delay="0.1s">
+    <!-- Волнистый верхний край -->
+    <div class="ps3-footer-wave-top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#000e1e" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+    </div>
+
+    <!-- Основное содержимое футера -->
+    <div class="container py-5 px-lg-5">
+        <div class="row g-5">
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="ps3-footer-item">
+                    <h4 class="text-white mb-4 ps3-glow-text">Eduworks</h4>
+                    <p class="text-white-50">Conectăm elevii, instituțiile de învățământ și companiile pentru o carieră de succes.</p>
+                    <div class="d-flex pt-3">
+                        <a class="btn btn-outline-light btn-social ps3-social-btn" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social ps3-social-btn" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social ps3-social-btn" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-light btn-social ps3-social-btn" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="ps3-footer-item">
+                    <h4 class="text-white mb-4 ps3-glow-text">Link-uri rapide</h4>
+                    <a class="btn btn-link ps3-footer-link" href="{{ url_for('about') }}">Despre noi</a>
+                    <a class="btn btn-link ps3-footer-link" href="{{ url_for('contact') }}">Contactează-ne</a>
+                    <a class="btn btn-link ps3-footer-link" href="{{ url_for('service') }}">Serviciile noastre</a>
+                    <a class="btn btn-link ps3-footer-link" href="{{ url_for('project') }}">Proiecte</a>
+                    <a class="btn btn-link ps3-footer-link" href="{{ url_for('team') }}">Echipa noastră</a>
+                </div>
+            </div>
+            <div class="col-lg-3 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="ps3-footer-item">
+                    <h4 class="text-white mb-4 ps3-glow-text">Contact</h4>
+                    <p class="ps3-contact-item"><i class="fa fa-map-marker-alt me-3"></i>Chișinău, Moldova</p>
+                    <p class="ps3-contact-item"><i class="fa fa-phone-alt me-3"></i>+373 22 123 456</p>
+                    <p class="ps3-contact-item"><i class="fa fa-envelope me-3"></i>info@eduworks.md</p>
+                </div>
+            </div>
+            <div class="col-lg-2 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="ps3-footer-item">
+                    <h4 class="text-white mb-4 ps3-glow-text">Newsletter</h4>
+                    <p class="text-white-50">Abonează-te pentru a primi ultimele noutăți</p>
+                    <div class="position-relative w-100">
+                        <input class="form-control ps3-newsletter-input" type="text" placeholder="Email" aria-label="Email">
+                        <button type="button" class="btn ps3-newsletter-btn"><i class="fa fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Частицы для анимации -->
+    <div id="particles-js" class="ps3-particles"></div>
+
+    <!-- Нижняя часть футера -->
+    <div class="container-fluid ps3-footer-bottom py-3">
+        <div class="container px-lg-5">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50">&copy; <span class="current-year"></span> <a href="{{ url_for('index') }}" class="ps3-glow-text-sm">Eduworks.md</a>. Toate drepturile rezervate.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <div class="ps3-footer-badges">
+                        <a href="#" class="ps3-badge">Politica de confidențialitate</a>
+                        <a href="#" class="ps3-badge">Termeni și condiții</a>
+                        <a href="#" class="ps3-badge">FAQ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Стили для футера -->
+<style>
+    /* Общие стили футера */
+    .ps3-footer {
+        background-color: #000e1e;
+        color: #fff;
+        z-index: 5;
+        margin-top: 50px;
+    }
+
+    .ps3-footer-wave-top {
+        position: absolute;
+        top: -80px;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+    }
+
+    /* Стили для свечения текста */
+    .ps3-glow-text {
+        text-shadow: 0 0 10px rgba(69, 195, 237, 0.6), 0 0 20px rgba(69, 195, 237, 0.3);
+        font-weight: 600;
+        position: relative;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .ps3-glow-text::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: linear-gradient(90deg, #3498db, transparent);
+        animation: ps3PulseWidth 2s infinite alternate;
+    }
+
+    .ps3-glow-text-sm {
+        color: #3498db;
+        text-decoration: none;
+        text-shadow: 0 0 5px rgba(69, 195, 237, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .ps3-glow-text-sm:hover {
+        color: #49a3df;
+        text-shadow: 0 0 8px rgba(69, 195, 237, 0.7);
+    }
+
+    /* Анимация подчеркивания */
+    @keyframes ps3PulseWidth {
+        0% { width: 30px; box-shadow: 0 0 5px rgba(69, 195, 237, 0.3); }
+        100% { width: 50px; box-shadow: 0 0 10px rgba(69, 195, 237, 0.6); }
+    }
+
+    /* Стили для ссылок */
+    .ps3-footer-link {
+        position: relative;
+        display: block;
+        color: rgba(255, 255, 255, 0.7) !important;
+        margin-bottom: 10px;
+        padding-left: 25px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .ps3-footer-link:hover {
+        color: #fff !important;
+        transform: translateX(5px);
+    }
+
+    .ps3-footer-link::before {
+        content: "\f105";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+    .ps3-footer-link:hover::before {
+        left: 5px;
+        color: #49a3df;
+    }
+
+    /* Стили для информации о контактах */
+    .ps3-contact-item {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 15px;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .ps3-contact-item i {
+        color: #3498db;
+        width: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .ps3-contact-item:hover {
+        color: #fff;
+    }
+
+    .ps3-contact-item:hover i {
+        color: #49a3df;
+        transform: scale(1.1);
+    }
+
+    /* Стили для социальных кнопок */
+    .ps3-social-btn {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-right: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        color: #fff;
+        transition: all 0.3s ease;
+        background-color: transparent;
+    }
+
+    .ps3-social-btn:hover {
+        background-color: #3498db;
+        border-color: #3498db;
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    }
+
+    /* Стили для формы подписки */
+    .ps3-newsletter-input {
+        height: 46px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border-radius: 30px;
+        padding-right: 50px;
+        transition: all 0.3s ease;
+    }
+
+    .ps3-newsletter-input:focus {
+        border-color: #3498db;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+    }
+
+    .ps3-newsletter-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .ps3-newsletter-btn {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        height: 36px;
+        width: 36px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        border: none;
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+
+    .ps3-newsletter-btn:hover {
+        background: linear-gradient(135deg, #49a3df, #3498db);
+        transform: rotate(15deg);
+    }
+
+    /* Нижняя часть футера */
+    .ps3-footer-bottom {
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        position: relative;
+        z-index: 10;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Стили для бейджей */
+    .ps3-footer-badges {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .ps3-badge {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-left: 15px;
+        position: relative;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .ps3-badge:hover {
+        color: #fff;
+    }
+
+    .ps3-badge::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 1px;
+        background-color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+    .ps3-badge:hover::after {
+        width: 100%;
+    }
+
+    /* Частицы */
+    .ps3-particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    /* Анимация для элементов футера */
+    .ps3-footer-item {
+        position: relative;
+        z-index: 10;
+        transition: all 0.5s ease;
+    }
+
+    .ps3-footer-item:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Медиа-запросы для адаптивности */
+    @media (max-width: 768px) {
+        .ps3-footer-badges {
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .ps3-badge {
+            margin: 0 8px;
+        }
+        
+        .ps3-footer-item {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .ps3-footer-item .d-flex {
+            justify-content: center;
+        }
+    }
+</style>
+
+<!-- JavaScript для анимаций и динамического контента футера -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Установка текущего года в копирайте
+        const currentYearElements = document.getElementsByClassName('current-year');
+        for (let i = 0; i < currentYearElements.length; i++) {
+            currentYearElements[i].textContent = new Date().getFullYear();
+        }
+        
+        // Инициализация particles.js
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#3498db"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#3498db",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        }
+        
+        // Добавление эффекта плавного появления элементов при скролле
+        const footerItems = document.querySelectorAll('.ps3-footer-item');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        footerItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(item);
+        });
+    });
+</script>
+<!-- Footer End -->

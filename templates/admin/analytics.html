@@ -1,0 +1,404 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Analytics - Admin Panel{% endblock %}
+
+{% block page_title %}Analytics & Reports{% endblock %}
+
+{% block breadcrumb_items %}
+<li class="breadcrumb-item"><a href="{{ url_for('admin_dashboard') }}">Dashboard</a></li>
+<li class="breadcrumb-item active">Analytics</li>
+{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Website Traffic Overview</h5>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary active" data-period="7">Week</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-period="30">Month</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-period="90">Quarter</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-period="365">Year</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="position: relative; height:350px;">
+                    <canvas id="trafficChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">Traffic Sources</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="position: relative; height:250px;">
+                    <canvas id="sourcesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">Devices</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="position: relative; height:250px;">
+                    <canvas id="devicesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">Browsers</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="position: relative; height:250px;">
+                    <canvas id="browsersChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-lg-8 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">Popular Pages</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Page</th>
+                                <th>Views</th>
+                                <th>Avg. Time</th>
+                                <th>Bounce Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#">/</a></td>
+                                <td>12,348</td>
+                                <td>2m 14s</td>
+                                <td>38.2%</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">/about</a></td>
+                                <td>5,624</td>
+                                <td>1m 36s</td>
+                                <td>42.7%</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">/service</a></td>
+                                <td>4,932</td>
+                                <td>3m 08s</td>
+                                <td>27.5%</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">/project</a></td>
+                                <td>3,845</td>
+                                <td>4m 21s</td>
+                                <td>21.8%</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">/contact</a></td>
+                                <td>2,756</td>
+                                <td>1m 43s</td>
+                                <td>31.4%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">Audience Geography</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Country</th>
+                                <th>Users</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>United States</td>
+                                <td>8,432</td>
+                                <td>34.5%</td>
+                            </tr>
+                            <tr>
+                                <td>United Kingdom</td>
+                                <td>3,254</td>
+                                <td>13.3%</td>
+                            </tr>
+                            <tr>
+                                <td>Russia</td>
+                                <td>2,786</td>
+                                <td>11.4%</td>
+                            </tr>
+                            <tr>
+                                <td>Germany</td>
+                                <td>2,168</td>
+                                <td>8.9%</td>
+                            </tr>
+                            <tr>
+                                <td>France</td>
+                                <td>1,932</td>
+                                <td>7.9%</td>
+                            </tr>
+                            <tr>
+                                <td>Others</td>
+                                <td>5,864</td>
+                                <td>24.0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Performance Metrics</h5>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Export
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">CSV</a></li>
+                        <li><a class="dropdown-item" href="#">Excel</a></li>
+                        <li><a class="dropdown-item" href="#">PDF</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h6 class="card-title text-muted">Avg. Load Time</h6>
+                                <h2 class="mb-0">2.4s</h2>
+                                <p class="small text-success"><i class="fas fa-arrow-down"></i> 0.3s from last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h6 class="card-title text-muted">Avg. Server Response</h6>
+                                <h2 class="mb-0">287ms</h2>
+                                <p class="small text-success"><i class="fas fa-arrow-down"></i> 34ms from last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h6 class="card-title text-muted">Bounce Rate</h6>
+                                <h2 class="mb-0">34.7%</h2>
+                                <p class="small text-danger"><i class="fas fa-arrow-up"></i> 2.1% from last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h6 class="card-title text-muted">Avg. Session Duration</h6>
+                                <h2 class="mb-0">3m 42s</h2>
+                                <p class="small text-success"><i class="fas fa-arrow-up"></i> 18s from last month</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Traffic chart
+    const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+    const trafficChart = new Chart(trafficCtx, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Visitors',
+                data: [1223, 1425, 1574, 1450, 1788, 1695, 1842],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 2,
+                tension: 0.3
+            }, {
+                label: 'Page Views',
+                data: [3245, 3890, 4120, 3780, 4350, 4200, 4780],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    
+    // Sources chart
+    const sourcesCtx = document.getElementById('sourcesChart').getContext('2d');
+    const sourcesChart = new Chart(sourcesCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Organic Search', 'Direct', 'Social', 'Referral', 'Email'],
+            datasets: [{
+                data: [45, 25, 15, 10, 5],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(255, 99, 132, 0.7)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+    
+    // Devices chart
+    const devicesCtx = document.getElementById('devicesChart').getContext('2d');
+    const devicesChart = new Chart(devicesCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Mobile', 'Desktop', 'Tablet'],
+            datasets: [{
+                data: [58, 36, 6],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+    
+    // Browsers chart
+    const browsersCtx = document.getElementById('browsersChart').getContext('2d');
+    const browsersChart = new Chart(browsersCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Chrome', 'Safari', 'Firefox', 'Edge', 'Others'],
+            datasets: [{
+                data: [62, 14, 12, 8, 4],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(255, 99, 132, 0.7)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+    
+    // Time period buttons
+    const periodButtons = document.querySelectorAll('[data-period]');
+    periodButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            periodButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            const period = this.dataset.period;
+            let labels, visitorData, pageViewData;
+            
+            // Change data based on selected period
+            if (period === '7') {
+                labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                visitorData = [1223, 1425, 1574, 1450, 1788, 1695, 1842];
+                pageViewData = [3245, 3890, 4120, 3780, 4350, 4200, 4780];
+            } else if (period === '30') {
+                labels = Array.from({length: 30}, (_, i) => i + 1);
+                visitorData = Array.from({length: 30}, () => Math.floor(Math.random() * 1000 + 1000));
+                pageViewData = Array.from({length: 30}, () => Math.floor(Math.random() * 2000 + 3000));
+            } else if (period === '90') {
+                labels = ['Jan', 'Feb', 'Mar'];
+                visitorData = [45320, 39450, 52780];
+                pageViewData = [123450, 102780, 145230];
+            } else if (period === '365') {
+                labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                visitorData = [41230, 39450, 42780, 44230, 48950, 52300, 53780, 51240, 49870, 47650, 45980, 50120];
+                pageViewData = [123450, 102780, 115230, 119870, 125430, 138760, 142350, 137890, 130540, 126780, 124560, 132450];
+            }
+            
+            // Update chart data
+            trafficChart.data.labels = labels;
+            trafficChart.data.datasets[0].data = visitorData;
+            trafficChart.data.datasets[1].data = pageViewData;
+            trafficChart.update();
+        });
+    });
+});
+</script>
+{% endblock %} 
