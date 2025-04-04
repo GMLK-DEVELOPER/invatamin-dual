@@ -1,12 +1,54 @@
 {% extends 'base.html' %}
 
-{% block title %}Contact - Digital Agency{% endblock %}
+{% block title %}Contact - EduWorks.md{% endblock %}
 
 {% block page_title %}Contact{% endblock %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="#">Pagini</a></li>
 <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Стили для интерактивной карты */
+    #map-container {
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    #map-container:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        transform: translateY(-3px);
+    }
+    
+    #map-container iframe {
+        filter: grayscale(15%);
+        transition: all 0.4s ease;
+    }
+    
+    #map-container:hover iframe {
+        filter: grayscale(0%);
+    }
+    
+    .map-controls {
+        pointer-events: none;
+    }
+    
+    .map-controls .btn {
+        pointer-events: all;
+        transition: all 0.2s ease;
+    }
+    
+    .map-instructions {
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+    }
+    
+    #map-container:hover + .mt-3 .map-instructions {
+        opacity: 1;
+    }
+</style>
 {% endblock %}
 
 {% block extra_js %}
@@ -28,13 +70,13 @@
         // Получаем данные формы
         const params = {
             from_name: document.getElementById('name').value,
-            company: document.getElementById('company').value,
+            institution: document.getElementById('institution').value,
             reply_to: document.getElementById('email').value,
             phone: document.getElementById('phone').value,
             subject: document.getElementById('subject').value,
             message: document.getElementById('message').value,
-            project_type: document.getElementById('project_type').value,
-            budget: document.getElementById('budget').value
+            inquiry_type: document.getElementById('inquiry_type').value,
+            user_type: document.getElementById('user_type').value
         };
 
         // Отправляем email используя EmailJS с указанными ID
@@ -58,6 +100,110 @@
     // Добавляем обработчик события отправки формы
     window.onload = function() {
         document.getElementById('contact-form').addEventListener('submit', sendEmail);
+        
+        // Улучшение интерактивности карты
+        const mapContainer = document.getElementById('map-container');
+        const mapIframe = mapContainer.querySelector('iframe');
+        
+        // Улучшаем фокус на карте
+        mapContainer.addEventListener('click', function() {
+            mapIframe.focus();
+        });
+        
+        // Добавляем подсказку при наведении
+        mapContainer.addEventListener('mouseenter', function() {
+            mapContainer.style.cursor = 'pointer';
+        });
+        
+        // Анимация при загрузке карты
+        mapIframe.addEventListener('load', function() {
+            mapIframe.style.opacity = '1';
+        });
+        
+        // Устанавливаем начальную прозрачность
+        mapIframe.style.opacity = '0.8';
+        mapIframe.style.transition = 'opacity 0.3s ease-in-out';
+        
+        // Функция увеличения карты
+        document.getElementById('enlargeMap').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Создаем модальное окно с картой
+            const modal = document.createElement('div');
+            modal.className = 'map-modal';
+            modal.innerHTML = `
+                <div class="map-modal-content">
+                    <span class="map-close">&times;</span>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3244.7218626872645!2d27.919464442058135!3d47.75436223429035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xacb8c8abacff6779%3A0x91b64b601fc36965!2snortek!5e1!3m2!1sru!2s!4v1743800715390!5m2!1sru!2s"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Добавляем стили для модального окна
+            const style = document.createElement('style');
+            style.textContent = `
+                .map-modal {
+                    display: block;
+                    position: fixed;
+                    z-index: 9999;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.8);
+                    overflow: hidden;
+                }
+                
+                .map-modal-content {
+                    position: relative;
+                    margin: 2% auto;
+                    width: 95%;
+                    height: 90%;
+                    animation: mapModalOpen 0.3s ease;
+                }
+                
+                @keyframes mapModalOpen {
+                    from {opacity: 0; transform: scale(0.8);}
+                    to {opacity: 1; transform: scale(1);}
+                }
+                
+                .map-close {
+                    color: white;
+                    position: absolute;
+                    top: -30px;
+                    right: 0;
+                    font-size: 28px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    z-index: 10000;
+                }
+            `;
+            
+            document.head.appendChild(style);
+            
+            // Закрытие модального окна
+            document.querySelector('.map-close').addEventListener('click', function() {
+                document.body.removeChild(modal);
+                document.head.removeChild(style);
+            });
+            
+            // Закрытие по клику вне карты
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    document.body.removeChild(modal);
+                    document.head.removeChild(style);
+                }
+            });
+        });
     }
 </script>
 {% endblock %}
@@ -67,92 +213,92 @@
 <div class="container-xxl py-5">
     <div class="container py-5 px-lg-5">
         <div class="wow fadeInUp" data-wow-delay="0.1s">
-            <p class="section-title text-secondary justify-content-center"><span></span>Contact Us<span></span></p>
-            <h1 class="text-center mb-5">Contact For Any Query</h1>
+            <p class="section-title text-secondary justify-content-center"><span></span>Contactează-ne<span></span></p>
+            <h1 class="text-center mb-5">Suntem aici pentru a te ajuta</h1>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <div class="wow fadeInUp" data-wow-delay="0.3s">
                     <!-- Сообщения о результате отправки -->
-                    <div id="success-message" class="alert alert-success text-center mb-4 d-none">Ваше сообщение успешно отправлено! Наша команда свяжется с вами в ближайшее время.</div>
-                    <div id="error-message" class="alert alert-danger text-center mb-4 d-none">Ошибка при отправке сообщения. Пожалуйста, попробуйте еще раз или свяжитесь с нами по телефону.</div>
+                    <div id="success-message" class="alert alert-success text-center mb-4 d-none">Mesajul tău a fost trimis cu succes! Echipa noastră te va contacta în curând.</div>
+                    <div id="error-message" class="alert alert-danger text-center mb-4 d-none">Eroare la trimiterea mesajului. Te rugăm să încerci din nou sau să ne contactezi prin telefon.</div>
                     
-                    <p class="text-center mb-4">Заполните форму ниже, чтобы обсудить ваш проект. Наши специалисты изучат ваш запрос и свяжутся с вами в течение 24 часов.</p>
+                    <p class="text-center mb-4">Completează formularul de mai jos pentru a discuta despre oportunitățile de educație duală sau parteneriate. Specialiștii noștri vor analiza cererea ta și te vor contacta în termen de 24 de ore.</p>
                     
                     <form id="contact-form" class="contact-form-corporate">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Ваше имя" required>
-                                    <label for="name">Ваше имя</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Numele tău" required>
+                                    <label for="name">Numele tău</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="company" name="company" placeholder="Название компании">
-                                    <label for="company">Название компании</label>
+                                    <input type="text" class="form-control" id="institution" name="institution" placeholder="Școală/Companie">
+                                    <label for="institution">Școală/Companie</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Ваш Email" required>
-                                    <label for="email">Ваш Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email-ul tău" required>
+                                    <label for="email">Email-ul tău</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Телефон">
-                                    <label for="phone">Телефон</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefon">
+                                    <label for="phone">Telefon</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <select class="form-select" id="project_type" name="project_type" required>
-                                        <option value="" selected disabled>Выберите тип проекта</option>
-                                        <option value="Веб-сайт">Веб-сайт</option>
-                                        <option value="Мобильное приложение">Мобильное приложение</option>
-                                        <option value="Брендинг">Брендинг</option>
-                                        <option value="SEO/Маркетинг">SEO/Маркетинг</option>
-                                        <option value="Другое">Другое</option>
+                                    <select class="form-select" id="inquiry_type" name="inquiry_type" required>
+                                        <option value="" selected disabled>Selectează tipul de solicitare</option>
+                                        <option value="Elev în căutare de stagii">Elev în căutare de stagii</option>
+                                        <option value="Companie interesată de parteneriat">Companie interesată de parteneriat</option>
+                                        <option value="Instituție de învățământ">Instituție de învățământ</option>
+                                        <option value="Informații generale">Informații generale</option>
+                                        <option value="Altele">Altele</option>
                                     </select>
-                                    <label for="project_type">Тип проекта</label>
+                                    <label for="inquiry_type">Tipul solicitării</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <select class="form-select" id="budget" name="budget">
-                                        <option value="" selected disabled>Выберите бюджет</option>
-                                        <option value="До 1000$">До 1000$</option>
-                                        <option value="1000$ - 5000$">1000$ - 5000$</option>
-                                        <option value="5000$ - 10000$">5000$ - 10000$</option>
-                                        <option value="10000$ - 25000$">10000$ - 25000$</option>
-                                        <option value="Более 25000$">Более 25000$</option>
+                                    <select class="form-select" id="user_type" name="user_type">
+                                        <option value="" selected disabled>Selectează statutul tău</option>
+                                        <option value="Elev">Elev</option>
+                                        <option value="Reprezentant companie">Reprezentant companie</option>
+                                        <option value="Profesor/Educator">Profesor/Educator</option>
+                                        <option value="Părinte">Părinte</option>
+                                        <option value="Altele">Altele</option>
                                     </select>
-                                    <label for="budget">Бюджет проекта</label>
+                                    <label for="user_type">Statutul tău</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Тема" required>
-                                    <label for="subject">Тема</label>
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subiect" required>
+                                    <label for="subject">Subiect</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Опишите ваш проект" id="message" name="message" style="height: 150px" required></textarea>
-                                    <label for="message">Описание проекта</label>
+                                    <textarea class="form-control" placeholder="Descrie solicitarea ta" id="message" name="message" style="height: 150px" required></textarea>
+                                    <label for="message">Mesajul tău</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="checkbox" id="privacy" required>
                                     <label class="form-check-label" for="privacy">
-                                        Я согласен с <a href="#">политикой конфиденциальности</a>
+                                        Sunt de acord cu <a href="#">politica de confidențialitate</a>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Отправить заявку</button>
+                                <button class="btn btn-primary w-100 py-3 ps3-button" type="submit">Trimite mesajul</button>
                             </div>
                         </div>
                     </form>
@@ -162,4 +308,71 @@
     </div>
 </div>
 <!-- Contact End -->
+
+<!-- Contact Info Start -->
+<div class="container-xxl py-5 bg-light">
+    <div class="container py-5 px-lg-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <h3 class="mb-4">Ai alte întrebări? Contactează-ne direct:</h3>
+                <div class="d-flex align-items-center mb-4">
+                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary rounded-circle" style="width: 50px; height: 50px;">
+                        <i class="fa fa-map-marker-alt text-white"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h5 class="mb-1">Adresa noastră</h5>
+                        <p class="mb-0">nortek, Șoseaua Balcani, Bălți, Молдавия</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-4">
+                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary rounded-circle" style="width: 50px; height: 50px;">
+                        <i class="fa fa-phone-alt text-white"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h5 class="mb-1">Telefon</h5>
+                        <p class="mb-0">+373 XXX XXX</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary rounded-circle" style="width: 50px; height: 50px;">
+                        <i class="fa fa-envelope-open text-white"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h5 class="mb-1">Email</h5>
+                        <p class="mb-0">contact@eduworks.md</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="h-100 rounded shadow-sm" style="min-height: 400px; overflow: hidden; position: relative;">
+                    <div id="map-container" class="w-100 h-100 position-relative">
+                        <iframe 
+                            class="w-100 h-100"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3244.7218626872645!2d27.919464442058135!3d47.75436223429035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xacb8c8abacff6779%3A0x91b64b601fc36965!2snortek!5e1!3m2!1sru!2s!4v1743800715390!5m2!1sru!2s"
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        <div class="position-absolute map-controls" style="top: 10px; right: 10px; z-index: 10;">
+                            <a href="https://goo.gl/maps/uQAiPCjKTBwADRQq8" class="btn btn-sm btn-primary" target="_blank">
+                                <i class="fa fa-external-link-alt"></i> Открыть в Google Maps
+                            </a>
+                        </div>
+                        <div class="position-absolute map-controls" style="top: 10px; left: 10px; z-index: 10;">
+                            <a href="#" class="btn btn-sm btn-light" id="enlargeMap">
+                                <i class="fa fa-search-plus"></i> Увеличить карту
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 text-center">
+                    <p class="small text-muted mb-0 map-instructions">Для взаимодействия с картой нажмите на неё</p>
+                    <p class="small text-muted map-instructions">Используйте колесо мыши для масштабирования</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact Info End -->
 {% endblock %} 

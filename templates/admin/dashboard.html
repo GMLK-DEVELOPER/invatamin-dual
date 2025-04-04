@@ -1,0 +1,182 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block breadcrumb_items %}
+    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="counter">{{ user_count }}</h4>
+                        <p class="text-muted">Total Users</p>
+                    </div>
+                    <div class="dashboard-card-icon bg-primary">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 75%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="counter">{{ post_count }}</h4>
+                        <p class="text-muted">Blog Posts</p>
+                    </div>
+                    <div class="dashboard-card-icon bg-success">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 60%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="counter">{{ page_count }}</h4>
+                        <p class="text-muted">Pages</p>
+                    </div>
+                    <div class="dashboard-card-icon bg-warning">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 45%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="counter">{{ comment_count }}</h4>
+                        <p class="text-muted">Comments</p>
+                    </div>
+                    <div class="dashboard-card-icon bg-info">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 mb-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Recent Posts</span>
+                <a href="{{ url_for('admin_posts_list') }}" class="btn btn-sm btn-primary">View All</a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if recent_posts %}
+                                {% for post in recent_posts %}
+                                <tr>
+                                    <td>{{ post.title }}</td>
+                                    <td>{{ post.author.name }}</td>
+                                    <td>{{ post.category.name if post.category else 'Uncategorized' }}</td>
+                                    <td><span class="badge {% if post.status == 'published' %}bg-success{% else %}bg-warning{% endif %}">{{ post.status }}</span></td>
+                                    <td>{{ post.created_at.strftime('%d %b %Y') }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center">No posts found</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 mb-4">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Recent Users</span>
+                <a href="{{ url_for('admin_users_list') }}" class="btn btn-sm btn-primary">View All</a>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    {% if recent_users %}
+                        {% for user in recent_users %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ url_for('static', filename='admin/img/profile.jpg') }}" alt="Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-0">{{ user.name }}</h6>
+                                    <small class="text-muted">{{ user.email }}</small>
+                                </div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">{{ user.role }}</span>
+                        </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="list-group-item text-center">No users found</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <span>System Info</span>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Flask Version:</span>
+                        <span>2.3.3</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Python Version:</span>
+                        <span>{{ python_version }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Database:</span>
+                        <span>MySQL</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Server Time:</span>
+                        <span>{{ now.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

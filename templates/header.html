@@ -1,3 +1,4 @@
+
 <!-- Navbar & Hero Start -->
 <div class="container-xxl position-relative p-0">
     <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
@@ -58,32 +59,32 @@
             
             /* Анимированные кнопки в стиле PS3 */
             .ps3-btn {
-                font-size: 1.8rem !important;
-                padding: 1.2rem 3.5rem !important;
-                margin-top: 2rem !important; /* Увеличиваем отступ сверху */
-                margin-bottom: 1rem !important;
-                font-weight: 600;
-                display: inline-block !important; /* Гарантируем правильное отображение */
+                font-size: 1rem !important;
+                padding: 0.6rem 1.8rem !important;
+                margin-top: 1rem !important;
+                margin-bottom: 0.5rem !important;
+                font-weight: 500;
+                display: inline-block !important;
                 background: linear-gradient(to bottom, #3598db, #2a80b9) !important;
-                box-shadow: 0 0 25px rgba(53, 152, 219, 0.8) !important;
+                box-shadow: 0 0 15px rgba(53, 152, 219, 0.5) !important;
                 border: none !important;
                 border-radius: 50px !important;
                 color: #fff !important;
-                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
+                text-shadow: 0 0 3px rgba(255, 255, 255, 0.4) !important;
                 position: relative !important;
-                z-index: 10 !important; /* Высокий z-index для гарантии видимости */
+                z-index: 10 !important;
                 transition: all 0.3s !important;
                 text-decoration: none !important;
                 cursor: pointer !important;
-                opacity: 1 !important; /* Гарантируем видимость */
-                visibility: visible !important; /* Гарантируем видимость */
+                opacity: 1 !important;
+                visibility: visible !important;
             }
             
             /* Эффект наведения */
             .ps3-btn:hover {
                 background: linear-gradient(to bottom, #49a3df, #2e8ece) !important;
-                box-shadow: 0 0 30px rgba(53, 152, 219, 1) !important;
-                transform: scale(1.05) !important;
+                box-shadow: 0 0 20px rgba(53, 152, 219, 0.7) !important;
+                transform: scale(1.03) !important;
             }
             
             /* PS3 стиль текста */
@@ -133,13 +134,13 @@
             
             /* PS3 свечение текста */
             .ps3-glow {
-                text-shadow: 0 0 15px rgba(69, 195, 237, 0.8), 0 0 30px rgba(69, 195, 237, 0.5);
+                text-shadow: 0 0 6px rgba(69, 195, 237, 0.4), 0 0 12px rgba(69, 195, 237, 0.2);
                 animation: ps3TextGlow 3s infinite alternate;
             }
             
             @keyframes ps3TextGlow {
-                0% { text-shadow: 0 0 10px rgba(69, 195, 237, 0.6), 0 0 20px rgba(69, 195, 237, 0.3); }
-                100% { text-shadow: 0 0 20px rgba(69, 195, 237, 0.9), 0 0 30px rgba(69, 195, 237, 0.7), 0 0 40px rgba(69, 195, 237, 0.5); }
+                0% { text-shadow: 0 0 4px rgba(69, 195, 237, 0.3), 0 0 8px rgba(69, 195, 237, 0.1); }
+                100% { text-shadow: 0 0 8px rgba(69, 195, 237, 0.4), 0 0 12px rgba(69, 195, 237, 0.3), 0 0 15px rgba(69, 195, 237, 0.2); }
             }
             
             /* Содержимое на первом плане */
@@ -272,9 +273,10 @@
             }
             
             .container.my-5.py-5.px-lg-5.content-foreground {
-                max-width: 100% !important;
-                padding-left: 0 !important;
-                padding-right: 0 !important;
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+                margin-top: 1rem !important;
+                margin-bottom: 1rem !important;
             }
             
             /* Растягиваем контент от края до края */
@@ -286,6 +288,7 @@
                 padding: 0 5% !important;
                 box-sizing: border-box;
                 overflow: hidden;
+                margin: 1rem 0 !important;
             }
             
             .hero-text {
@@ -306,10 +309,10 @@
             
             /* Увеличиваем размер заголовка */
             #ps3-main-title {
-                font-size: 4.5rem !important;
-                font-weight: 800;
-                margin-bottom: 2rem !important;
-                letter-spacing: 1.5px;
+                font-size: 2rem !important;
+                font-weight: 600;
+                margin-bottom: 1rem !important;
+                letter-spacing: 0.5px;
                 line-height: 1.1;
                 white-space: normal !important;
                 width: auto !important;
@@ -319,18 +322,18 @@
             
             /* Увеличиваем размер описания */
             .hero-text p {
-                font-size: 2.2rem !important;
-                line-height: 1.4;
-                margin-bottom: 3rem !important;
+                font-size: 1.1rem !important;
+                line-height: 1.3;
+                margin-bottom: 1.5rem !important;
                 max-width: 100%;
-                font-weight: 500;
+                font-weight: 400;
                 white-space: normal;
             }
             
             /* Увеличиваем изображение */
             .hero-image img {
-                max-width: 115% !important;
-                transform: scale(1.15);
+                max-width: 90% !important;
+                transform: scale(0.95);
                 transform-origin: right center;
             }
             
@@ -349,17 +352,17 @@
             /* Медиа-запрос для адаптации на мобильных устройствах */
             @media (max-width: 992px) {
                 #ps3-main-title {
-                    font-size: 3.5rem !important;
-                    letter-spacing: 1px;
+                    font-size: 1.8rem !important;
+                    letter-spacing: 0.5px;
                 }
                 
                 .hero-text p {
-                    font-size: 1.8rem !important;
+                    font-size: 1rem !important;
                 }
                 
                 .ps3-btn {
-                    font-size: 1.5rem !important;
-                    padding: 1rem 3rem !important;
+                    font-size: 0.9rem !important;
+                    padding: 0.6rem 2rem !important;
                 }
             }
             
@@ -376,13 +379,13 @@
                 }
                 
                 .hero-image img {
-                    max-width: 100% !important;
-                    transform: scale(1.05);
+                    max-width: 85% !important;
+                    transform: scale(0.9);
                     transform-origin: center center;
                 }
                 
                 #ps3-main-title {
-                    font-size: 3rem !important;
+                    font-size: 1.6rem !important;
                     text-align: center;
                 }
             }
@@ -423,13 +426,13 @@
             
             @keyframes glowPulse {
                 0% {
-                    text-shadow: 0 0 10px rgba(69, 195, 237, 0.6), 0 0 20px rgba(69, 195, 237, 0.4);
+                    text-shadow: 0 0 4px rgba(69, 195, 237, 0.3), 0 0 8px rgba(69, 195, 237, 0.1);
                 }
                 50% {
-                    text-shadow: 0 0 20px rgba(69, 195, 237, 0.9), 0 0 30px rgba(69, 195, 237, 0.7), 0 0 40px rgba(69, 195, 237, 0.5);
+                    text-shadow: 0 0 8px rgba(69, 195, 237, 0.4), 0 0 12px rgba(69, 195, 237, 0.3), 0 0 15px rgba(69, 195, 237, 0.2);
                 }
                 100% {
-                    text-shadow: 0 0 10px rgba(69, 195, 237, 0.6), 0 0 20px rgba(69, 195, 237, 0.4);
+                    text-shadow: 0 0 4px rgba(69, 195, 237, 0.3), 0 0 8px rgba(69, 195, 237, 0.1);
                 }
             }
             
@@ -730,7 +733,196 @@
             
             /* Отступ для контента под fixed navbar */
             .hero-header {
-                padding-top: 100px !important;
+                padding-top: 25px !important;
+                padding-bottom: 25px !important;
+                min-height: 60vh !important; /* Уменьшаем минимальную высоту */
+            }
+
+            .container.my-5.py-5.px-lg-5.content-foreground {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+                margin-top: 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .hero-content-wrapper {
+                padding: 0 5% !important;
+                margin: 1rem 0 !important;
+            }
+
+            /* Медиа-запрос для адаптации на мобильных устройствах */
+            @media (max-width: 992px) {
+                .hero-header {
+                    padding-top: 20px !important;
+                    padding-bottom: 20px !important;
+                    min-height: 50vh !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .hero-header {
+                    padding: 0 !important;
+                    min-height: 100vh !important;
+                    background: linear-gradient(180deg, #000e1e 0%, #001a36 100%) !important;
+                    position: relative !important;
+                    overflow: hidden !important;
+                }
+
+                /* Навигация */
+                .navbar {
+                    background: transparent !important;
+                    padding: 15px !important;
+                    height: 70px !important;
+                    display: flex !important;
+                    align-items: center !important;
+                }
+
+                .navbar-brand {
+                    padding: 0 !important;
+                    margin: 0 !important;
+                }
+
+                .navbar-brand img {
+                    height: 40px !important;
+                    width: auto !important;
+                }
+
+                /* Основной контент */
+                .container.my-5.py-5.px-lg-5.content-foreground {
+                    padding: 0 25px !important;
+                    margin: 0 !important;
+                    height: calc(100vh - 70px) !important;
+                }
+
+                .hero-content-wrapper {
+                    height: 100% !important;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    justify-content: flex-start !important;
+                    padding: 0 !important;
+                    position: relative !important;
+                }
+
+                /* Текстовый блок */
+                .hero-text {
+                    padding: 40px 0 0 0 !important;
+                    margin: 0 !important;
+                    text-align: left !important;
+                    max-width: 100% !important;
+                }
+
+                #ps3-main-title {
+                    font-size: 36px !important;
+                    line-height: 1.2 !important;
+                    margin: 0 0 20px 0 !important;
+                    color: #fff !important;
+                    font-weight: 600 !important;
+                }
+
+                .hero-text p {
+                    font-size: 16px !important;
+                    line-height: 1.5 !important;
+                    margin: 0 0 30px 0 !important;
+                    color: rgba(255, 255, 255, 0.9) !important;
+                    max-width: 90% !important;
+                }
+
+                /* Кнопка */
+                .ps3-btn {
+                    background: #3498db !important;
+                    color: #fff !important;
+                    padding: 12px 35px !important;
+                    border-radius: 25px !important;
+                    font-size: 16px !important;
+                    display: inline-block !important;
+                    text-decoration: none !important;
+                    box-shadow: 0 0 20px rgba(52, 152, 219, 0.4) !important;
+                    border: none !important;
+                }
+
+                /* Изображение */
+                .hero-image {
+                    position: absolute !important;
+                    bottom: 0 !important;
+                    left: 50% !important;
+                    transform: translateX(-50%) !important;
+                    width: 100% !important;
+                    text-align: center !important;
+                    padding-bottom: 20px !important;
+                }
+
+                .hero-image img {
+                    width: 200px !important;
+                    height: auto !important;
+                    margin: 0 auto !important;
+                    display: block !important;
+                }
+
+                /* Белая волна внизу */
+                .ps3-curve {
+                    position: absolute !important;
+                    bottom: 0 !important;
+                    left: 0 !important;
+                    width: 100% !important;
+                    height: 100px !important;
+                    background: #fff !important;
+                    border-radius: 100% 100% 0 0 !important;
+                    transform: scaleX(1.5) !important;
+                }
+
+                /* Меню */
+                .navbar-collapse {
+                    position: absolute !important;
+                    top: 70px !important;
+                    left: 15px !important;
+                    right: 15px !important;
+                    background: rgba(0, 14, 30, 0.95) !important;
+                    padding: 15px !important;
+                    border-radius: 10px !important;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+                }
+
+                .navbar-toggler {
+                    padding: 0 !important;
+                    border: none !important;
+                    margin-right: 15px !important;
+                }
+
+                .navbar-toggler .fa-bars {
+                    color: #fff !important;
+                    font-size: 24px !important;
+                }
+            }
+
+            /* Фиксы для маленьких экранов */
+            @media (max-width: 375px) {
+                .hero-text {
+                    padding: 30px 0 0 0 !important;
+                }
+
+                #ps3-main-title {
+                    font-size: 32px !important;
+                }
+
+                .hero-text p {
+                    font-size: 15px !important;
+                }
+
+                .ps3-btn {
+                    padding: 10px 30px !important;
+                    font-size: 15px !important;
+                }
+
+                .hero-image img {
+                    width: 180px !important;
+                }
+            }
+
+            /* Фиксы для высоких экранов */
+            @media (min-height: 700px) {
+                .hero-image {
+                    bottom: 60px !important;
+                }
             }
         </style>
         
@@ -778,21 +970,7 @@
             </div>
             
             <!-- Breadcrumbs с появлением по одному -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <hr id="ps3-divider" class="bg-white mx-auto mt-0" style="width: 90px; box-shadow: 0 0 10px rgba(69, 195, 237, 0.7); opacity: 0;">
-                    
-                    <nav id="ps3-nav" aria-label="breadcrumb" style="opacity: 0;">
-                        <ol class="breadcrumb justify-content-center">
-                            <li class="breadcrumb-item ps3-text-reveal"><a class="text-white" href="{{ url_for('index') }}" style="text-shadow: 0 0 5px rgba(69, 195, 237, 0.5);">Home</a></li>
-                            {% block breadcrumb %}
-                            <li class="breadcrumb-item ps3-text-reveal"><a class="text-white" href="#" style="text-shadow: 0 0 5px rgba(69, 195, 237, 0.5);">Pages</a></li>
-                            <li class="breadcrumb-item text-white active ps3-text-reveal" aria-current="page" style="text-shadow: 0 0 5px rgba(69, 195, 237, 0.5);">Page</li>
-                            {% endblock %}
-                        </ol>
-                    </nav>
-                </div>
-            </div>
+            
         </div>
         
         <!-- Закругленный переход снизу -->
@@ -1121,4 +1299,5 @@ document.addEventListener('DOMContentLoaded', function() {
     handleScroll();
 });
 </script>
+<!-- Navbar & Hero End --> 
 <!-- Navbar & Hero End --> 

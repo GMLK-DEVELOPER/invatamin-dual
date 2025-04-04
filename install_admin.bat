@@ -1,0 +1,6 @@
+@echo off
+echo Installing Digital Agency Admin Panel...
+python install_admin.py
+echo.
+echo Press any key to exit...
+pause > nul 

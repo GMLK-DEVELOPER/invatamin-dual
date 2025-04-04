@@ -618,11 +618,15 @@ h6,
 /*** Testimonial ***/
 .testimonial-carousel .testimonial-item {
     padding: 0 30px 30px 30px;
+    position: relative;
+    z-index: 2;
 }
 
 .testimonial-carousel .owl-nav {
     display: flex;
     justify-content: center;
+    position: relative;
+    z-index: 3;
 }
 
 .testimonial-carousel .owl-nav .owl-prev,
@@ -638,6 +642,7 @@ h6,
     border-radius: 60px;
     font-size: 22px;
     transition: .5s;
+    z-index: 4;
 }
 
 .testimonial-carousel .owl-nav .owl-prev:hover,
@@ -645,6 +650,11 @@ h6,
     color: #FFFFFF;
     background: var(--primary);
     box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+}
+
+.testimonial-carousel {
+    position: relative;
+    overflow: visible;
 }
 
 

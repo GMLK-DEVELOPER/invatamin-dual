@@ -1,0 +1,83 @@
+/**
+ * Dashboard styles for admin panel
+ */
+
+/* Dashboard cards */
+.dashboard-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: white;
+    margin-right: 10px;
+}
+
+.counter {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Progress bars */
+.progress {
+    height: 8px;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+/* Table styles */
+.table-responsive {
+    border-radius: 0 0 10px 10px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* List group */
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 1rem 1.25rem;
+}
+
+.list-group-item:first-child {
+    border-top: none;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .dashboard-card {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .counter {
+        font-size: 1.5rem;
+    }
+    
+    .dashboard-card-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+} 

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Admin Dashboard{% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ url_for('static', filename='admin/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='admin/css/dashboard.css') }}" rel="stylesheet">
+    <!-- Fallback to CDN if local files are not available -->
+    <script>
+        // Check if bootstrap.min.css was loaded successfully
+        (function() {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css';
+            link.onerror = function() {
+                console.error('Failed to load Bootstrap from CDN');
+            };
+            document.head.appendChild(link);
+        })();
+    </script>
+
+    <!-- Custom Admin Styles -->
+    <link href="{{ url_for('static', filename='admin/css/style.css') }}" rel="stylesheet">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar Start -->
+        <nav id="sidebar" class="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="{{ url_for('static', filename='admin/img/logo.png') }}" class="img-fluid logo" alt="Logo">
+                <h3>Admin Panel</h3>
+                <button type="button" id="sidebarCollapse" class="btn">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="{% if active_menu == 'dashboard' %}active{% endif %}">
+                    <a href="{{ url_for('admin_dashboard') }}">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="{% if active_menu == 'users' %}active{% endif %}">
+                    <a href="#userSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                    <ul class="collapse list-unstyled {% if active_menu == 'users' %}show{% endif %}" id="userSubmenu">
+                        <li>
+                            <a href="{{ url_for('admin_users_list') }}">All Users</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin_add_user') }}">Add New</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin_user_roles') }}">Roles</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{% if active_menu == 'pages' %}active{% endif %}">
+                    <a href="#pageSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Pages</span>
+                    </a>
+                    <ul class="collapse list-unstyled {% if active_menu == 'pages' %}show{% endif %}" id="pageSubmenu">
+                        <li>
+                            <a href="{{ url_for('admin_pages_list') }}">All Pages</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin_add_page') }}">Add New</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{% if active_menu == 'blog' %}active{% endif %}">
+                    <a href="#blogSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-blog"></i>
+                        <span>Blog</span>
+                    </a>
+                    <ul class="collapse list-unstyled {% if active_menu == 'blog' %}show{% endif %}" id="blogSubmenu">
+                        <li>
+                            <a href="{{ url_for('admin_posts_list') }}">All Posts</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin_add_post') }}">Add New</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin_categories') }}">Categories</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin_tags') }}">Tags</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin_comments') }}">Comments</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{% if active_menu == 'media' %}active{% endif %}">
+                    <a href="{{ url_for('admin_media_library') }}">
+                        <i class="fas fa-images"></i>
+                        <span>Media Library</span>
+                    </a>
+                </li>
+                <li class="{% if active_menu == 'forms' %}active{% endif %}">
+                    <a href="{{ url_for('admin_forms') }}">
+                        <i class="fas fa-envelope"></i>
+                        <span>Forms & Submissions</span>
+                    </a>
+                </li>
+                <li class="{% if active_menu == 'analytics' %}active{% endif %}">
+                    <a href="{{ url_for('admin_analytics') }}">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="{% if active_menu == 'settings' %}active{% endif %}">
+                    <a href="#settingsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <ul class="collapse list-unstyled {% if active_menu == 'settings' %}show{% endif %}" id="settingsSubmenu">
+                        <li>
+                            <a href="{{ url_for('admin_general_settings') }}">General</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin_appearance') }}">Appearance</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin_backups') }}">Backups</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <a href="{{ url_for('admin_profile') }}" class="btn btn-profile">
+                    <img src="{{ url_for('static', filename='admin/img/profile.jpg') }}" class="rounded-circle" alt="Profile">
+                    <span>{{ current_user.name if current_user.is_authenticated else 'Admin' }}</span>
+                </a>
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-danger logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </nav>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <div id="content" class="admin-content">
+            <!-- Navbar Start -->
+            <nav class="navbar admin-navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center">
+                        <button type="button" id="sidebarCollapseSmall" class="btn me-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <h4 class="page-title mb-0">{% block page_title %}Dashboard{% endblock %}</h4>
+                    </div>
+
+                    <div class="navbar-content d-flex align-items-center">
+                        <div class="search-bar me-4">
+                            <form action="{{ url_for('admin_search') }}" method="get">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="q" placeholder="Search...">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="dropdown me-3">
+                            <button class="btn btn-light position-relative dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bell"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    3
+                                </span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end notifications-dropdown" aria-labelledby="notificationsDropdown">
+                                <li class="dropdown-header">
+                                    <h6 class="mb-0">Notifications</h6>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">
+                                    <div class="notification-item">
+                                        <div class="icon bg-primary">
+                                            <i class="fas fa-user-plus"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p>New user registered</p>
+                                            <small>15 minutes ago</small>
+                                        </div>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item" href="#">
+                                    <div class="notification-item">
+                                        <div class="icon bg-success">
+                                            <i class="fas fa-comment"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p>New comment on blog post</p>
+                                            <small>1 hour ago</small>
+                                        </div>
+                                    </div>
+                                </a></li>
+                                <li><a class="dropdown-item" href="#">
+                                    <div class="notification-item">
+                                        <div class="icon bg-warning">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p>Server load high</p>
+                                            <small>3 hours ago</small>
+                                        </div>
+                                    </div>
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-center" href="{{ url_for('admin_notifications') }}">View All Notifications</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle profile-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ url_for('static', filename='admin/img/profile.jpg') }}" class="rounded-circle" alt="Profile">
+                                <span>{{ current_user.name if current_user.is_authenticated else 'Admin' }}</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="{{ url_for('admin_profile') }}"><i class="fas fa-user me-2"></i> My Profile</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('admin_account_settings') }}"><i class="fas fa-cog me-2"></i> Account Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ url_for('index') }}" target="_blank"><i class="fas fa-globe me-2"></i> View Website</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="{{ url_for('admin_logout') }}"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+            <!-- Main Content Start -->
+            <div class="container-fluid main-content p-4">
+                {% block breadcrumb %}
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin_dashboard') }}">Dashboard</a></li>
+                        {% block breadcrumb_items %}{% endblock %}
+                    </ol>
+                </nav>
+                {% endblock %}
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                {% block content %}
+                <!-- Main Content -->
+                {% endblock %}
+            </div>
+            <!-- Main Content End -->
+
+            <!-- Footer Start -->
+            <footer class="admin-footer p-4">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-0">&copy; {{ now.year }} Digital Agency Admin. All rights reserved.</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p class="mb-0">Designed & Developed with <i class="fas fa-heart text-danger"></i> by Your Company</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="{{ url_for('static', filename='admin/js/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='admin/js/main.js') }}"></script>
+    
+    {% block extra_js %}{% endblock %}
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sidebar toggle
+            document.getElementById('sidebarCollapse').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('active');
+                document.getElementById('content').classList.toggle('expanded');
+            });
+            
+            document.getElementById('sidebarCollapseSmall').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('active');
+                document.getElementById('content').classList.toggle('expanded');
+            });
+            
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+
+    <!-- Page Specific Scripts -->
+    {% if active_menu == 'dashboard' %}
+    <script>
+        // Fallback for dashboard.js if it fails to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if dashboard.js loaded properly
+            if (typeof setupDashboard === 'undefined') {
+                console.log('Loading dashboard.js fallback');
+                // Initiate counter animations manually
+                const counters = document.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.innerText);
+                    const count = 0;
+                    const increment = target / 20;
+                    
+                    function updateCount() {
+                        const currentCount = Math.ceil(parseInt(counter.innerText) || 0);
+                        
+                        if (currentCount < target) {
+                            counter.innerText = Math.ceil(currentCount + increment);
+                            setTimeout(updateCount, 50);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    }
+                    
+                    updateCount();
+                });
+            }
+        });
+    </script>
+    {% endif %}
+</body>
+
+</html> 
